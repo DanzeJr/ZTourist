@@ -1,0 +1,111 @@
+@charset "utf-8";
+/* CSS Document */
+
+.register-form{
+    width: 65%;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9);
+    padding-bottom: 4%;
+    padding-top: 8%;
+    margin-bottom: 6% !important;
+}
+
+.register-form > ul > li{
+    list-style-type: none;
+}
+
+@media screen and (max-width:767px){
+    .register-form{
+        width: 99%;
+    }
+}
+
+.register-form .tab a{
+    display: block;
+    text-decoration: none;
+    color: black;
+    height: 70px;
+    line-height: 70px;
+    background-color: lightgray;
+    font-size: 20px;
+    float: left;
+    width: 50%;
+    text-align: center;
+
+    transition: 0.25s ease;
+    -webkit-transition: 0.25s ease;
+    -moz-transition: 0.25s ease;
+    -ms-transition: 0.25s ease;
+    -o-transition: 0.25s ease;
+}
+
+.register-form .tab a:hover{
+    background-color: black !important;
+    color: white;
+}
+
+.register-form .tab-group > .active > a{
+    background-color: orangered !important;
+    color: white;
+}
+
+.register-form .tab-content > div:last-child{
+    display:none;
+}
+
+.register-form .tab-content h1{
+    text-align: center;
+    color: black;	
+}
+
+.register-form .tab-content .form-group label{
+    font-size: 18px;
+}
+
+.register-form input, .register-form textarea{
+    font-size: 16px;
+    display: block;
+    padding: 5px 10px;
+    border: 1px solid grey;
+    color: black;
+    border-radius: 0;
+}
+
+.register-form input:focus, .register-form textarea:focus{
+    outline: none;
+}
+
+.register-form .regbtn{	
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 15px 0;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    background: orangered;
+    color: white;
+    transition: all .5s ease;
+}
+
+.register-form .regbtn:hover{
+    background-color: black;
+}
+
+.register-form .tab-content .form-check-label, .register-form .tab-content .form-check-input{
+    float: left;
+}
+
+.register-form .forgot{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    float: right;
+    display: inline-block;
+}
+
+.register-form label.error{
+    color: red !important;
+    font-size: 12px !important;
+}

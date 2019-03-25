@@ -1,0 +1,58 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configuration for the default package. -->
+    <constant name="struts.ui.theme" value="simple"/>
+    <package name="default" extends="struts-default">
+        <interceptors>
+            <interceptor name="guestAuth" class="hoangvp.interceptors.GuestAuthenticationInterceptor"></interceptor>
+             <interceptor-stack name="guestStack">
+                <interceptor-ref name="guestAuth" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
+        </interceptors>
+        
+        
+        <action name="">
+            <result>index.jsp</result>
+        </action>
+        <action name="init" class="hoangvp.actions.InitNavAction">
+            <result name="success">index.jsp</result>
+        </action>
+        <action name="searchTour" class="hoangvp.actions.SearchTourAction">
+            <result name="success">searchTour.jsp</result>
+        </action>
+        <action name="signIn" class="hoangvp.actions.SignInAction">
+            <result name="login">register.jsp</result>
+            <result name="success">index.jsp</result>
+        </action>
+        <action name="signOut" class="hoangvp.actions.SignOutAction">
+            <result name="success">index.jsp</result>
+        </action>
+        <action name="signUp_*" class="hoangvp.actions.SignUpAction" method="{1}">
+            <result name="input">register.jsp</result>
+            <result name="success">register.jsp</result>        
+        </action>
+        <action name="viewProfile" class="hoangvp.actions.ViewProfileAction">
+            <result name="success">dashboard.jsp</result>
+        </action>
+        <action name="editProfile" class="hoangvp.actions.ViewProfileAction">
+            <result name="success">editProfile.jsp</result>
+        </action>
+        <action name="updateProfile" class="hoangvp.actions.UpdateProfileAction">
+            <result name="input">editProfile.jsp</result>
+            <result name="success">dashboard.jsp</result>
+        </action>
+        <action name="changePassword" class="hoangvp.actions.ChangePasswordAction">
+            <result name="input">changePassword.jsp</result>
+            <result name="success">changePassword.jsp</result>
+        </action>
+        
+        <action name="signInStaff" class="hoangvp.actions.SignInStaffAction">
+            <result name="login">loginStaff.jsp</result>
+            <result name="success">homeStaff.jsp</result>
+        </action>
+    </package>
+</struts>

@@ -1,0 +1,8 @@
+2019-03-21 19:14:50 ERROR SearchTourAction:87 - The offset specified in a OFFSET clause may not be negative.
+2019-03-21 19:25:01 ERROR SignOutGuestAction:46 - null
+2019-03-21 19:25:54 ERROR SignOutGuestAction:46 - null
+2019-03-21 19:26:04 ERROR SignOutGuestAction:46 - null
+2019-03-21 19:28:47 ERROR SignOutGuestAction:46 - null
+2019-03-21 19:51:49 ERROR SignOutGuestAction:46 - java.lang.NullPointerException
+2019-03-21 20:15:11 ERROR SignOutGuestAction:42 - null
+2019-03-21 20:16:11 ERROR SignOutGuestAction:42 - null

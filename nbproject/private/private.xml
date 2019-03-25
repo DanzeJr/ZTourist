@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/struts.xml</file>
+            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/web/loginStaff.jsp</file>
+            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/web/index.jsp</file>
+            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/web/register.jsp</file>
+            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/dtos/EmployeeDTO.java</file>
+            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/actions/SignOutStaffAction.java</file>
+            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/actions/SignInStaffAction.java</file>
+            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/filters/AuthFilter.java</file>
+            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/daos/EmployeeDAO.java</file>
+        </group>
+    </open-files>
+</project-private>

@@ -143,7 +143,6 @@
         <script src="js/countdown.js"></script>
         <script src="js/parallax.js"></script>
         <script src="js/main.js"></script>
-        <script src="js/bootstrap-datetimepicker.min.js"></script>
         <script src="js/jquery.validate.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {

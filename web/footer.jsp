@@ -89,57 +89,6 @@
                 Wrapper End
 *************************************-->
 <!--************************************
-                Search Start
-*************************************-->
-<%--
-<div id="tg-search" class="tg-search">
-    <button type="button" class="close"><i class="icon-cross"></i></button>
-    <s:form action="searchTour_searchName">
-        <fieldset>
-            <div class="form-group">
-                <s:textfield type="search" name="search" cssClass="form-control" value="" placeholder=""/>
-                <button type="submit" class="tg-btn"><span class="icon-search2"></span></button>
-            </div>
-        </fieldset>
-    </s:form>
-    <ul class="tg-destinations">
-        <li>
-            <a href="javascript:void(0);">
-                <h3>Europe</h3>
-                <em>(05)</em>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0);">
-                <h3>Africa</h3>
-                <em>(15)</em>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0);">
-                <h3>Asia</h3>
-                <em>(12)</em>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0);">
-                <h3>Oceania</h3>
-                <em>(02)</em>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0);">
-                <h3>North America</h3>
-                <em>(08)</em>
-            </a>
-        </li>
-    </ul>
-</div>
---%>
-<!--************************************
-                Search End
-*************************************-->
-<!--************************************
                 Login Singup Start
 *************************************-->
 <div id="tg-loginsingup" class="tg-loginsingup" data-vide-bg="poster: images/singup-img.jpg" data-vide-options="position: 0% 50%">

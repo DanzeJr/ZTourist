@@ -1,5 +1,5 @@
 <%-- 
-    Document   : homeStaff
+    Document   : searchTourStaff
     Created on : Mar 25, 2019, 10:31:47 PM
     Author     : Danze
 --%>
@@ -15,7 +15,7 @@
                 color: black;
             }
         </style>
-        <title>Z Tourist Staff - Home</title>
+        <title>Z Tourist Staff - Search</title>
     </head>
     <body class="tg-home tg-homevthree tg-login">
         <s:action name="init"/>
@@ -36,8 +36,37 @@
         <nav id="menu">
             <ul>
                 <li><a href="homeStaff.jsp">Home</a></li>
-                <li><a href="destinations.html">Destinations</a></li>
-                <li><a href="javascript:void(0);">Listings</a></li>
+                <li><a href="viewAllDestinationsStaff">Destinations</a>
+                    <ul>
+                        <s:if test="%{#session.ROLE == 'admin'}">
+                        <li><a href="addDestination.jsp">Add new destination</a></li>                    
+                        </s:if>
+                        <li><a href="link">Search destination</a></li>
+                    </ul>
+                </li>
+                <li><a href="viewAllTour">Tours</a>
+                    <s:if test="%{#session.ROLE == 'admin'}">
+                    <ul>
+                        <li><a href="addTour.jsp">Add new tour</a></li>
+                    </ul>
+                    </s:if>
+                </li>
+                <s:if test="%{#session.ROLE == 'guide'}">
+                <li><a href="viewAllTasks">Schedule Task</a></li>
+                </s:if>
+                <s:if test="%{#session.ROLE == 'admin'}">
+                <li><a href="viewAllStaffs">Staffs</a>
+                    <ul>
+                        <li><a href="addStaff.jsp">Add new staff</a></li>
+                    </ul>
+                </li>
+                </s:if>                
+                <s:if test="%{#session.ROLE == 'admin'}">
+                <li><a href="checkBooking">Check Booking</a></li>
+                </s:if>
+                <s:if test="%{#session.ROLE == 'admin'}">
+                <li><a href="viewAllSaleCodes">Promotion Codes</a></li>
+                </s:if>
             </ul>
         </nav>
         <!--************************************
@@ -106,9 +135,40 @@
                                 </div>
                                 <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
                                     <ul>
-                                        <li class="menu-item-has-children current-menu-item"><a href="homeStaff.jsp">Home</a></li>
-                                        <li><a href="destinations.html">destinations</a></li>
-                                        <li class="menu-item-has-children menu-item-has-mega-menu"><a href="javascript:void(0);">listings</a></li>
+                                        <li class="menu-item-has-children"><a href="homeStaff.jsp">Home</a></li>
+                                        <li class="menu-item-has-children"><a href="viewAllDestinationsStaff">Destinations</a>
+                                            <ul class="sub-menu">
+                                                <s:if test="%{#session.ROLE == 'admin'}">
+                                                    <li><a href="addDestination.jsp">Add new destination</a></li>                    
+                                                    </s:if>
+                                                <li><a href="link">Search destination</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item-has-children"><a href="viewAllTour">Tours</a>
+                                            <s:if test="%{#session.ROLE == 'admin'}">
+                                                <ul class="sub-menu">
+                                                    <li><a href="addTour.jsp">Add new tour</a></li>
+                                                </ul>
+                                            </s:if>
+                                        </li>
+                                        <s:if test="%{#session.ROLE == 'guide'}">
+                                            <li><a href="viewAllTasks">Schedule Task</a></li>
+                                        </s:if>
+                                        <s:if test="%{#session.ROLE == 'admin'}">
+                                            <li class="menu-item-has-children"><a href="viewAllStaffs">Staffs</a>
+                                            <s:if test="%{#session.ROLE == 'admin'}">
+                                                <ul class="sub-menu">
+                                                    <li><a href="addStaff.jsp">Add new staff</a></li>
+                                                </ul>
+                                            </s:if>
+                                            </li>
+                                        </s:if>                
+                                        <s:if test="%{#session.ROLE == 'admin'}">
+                                            <li><a href="checkBooking">Check Booking</a></li>
+                                        </s:if>
+                                        <s:if test="%{#session.ROLE == 'admin'}">
+                                            <li><a href="viewAllSaleCodes">Promotion Codes</a></li>
+                                        </s:if>
                                     </ul>
                                 </div>
                             </nav>
@@ -158,6 +218,12 @@
                                                           5:'1000$ - 1500$', 6:'1500$ - 2000$', 7:'2000$ - 2500$', 8:'Upper 2500$'}" 
                                                           data-live-search="true" data-width="100%"/>
                                             </div>
+                                        </div>
+                                        <div class="form-group" style="height: 50px; margin-top: 10px">
+                                            <s:textfield name="idSearch" style="height: 100%; width: 100%; font-size: 14px" placeholder="Tour ID"/>
+                                        </div>
+                                        <div class="form-group" style="height: 50px; margin-top: 10px">
+                                            <s:textfield name="nameSearch" style="height: 100%; width: 100%; font-size: 14px" placeholder="Tour Name"/>
                                         </div>
                                         <div class="form-group">
                                             <button class="tg-btn" type="submit"><span>find tours</span></button>
@@ -327,12 +393,15 @@
                                                             </s:if>
                                                             <s:else> <%-- if page 2 is active --%>
                                                             <li><s:a href="%{prePage}"><s:property value="%{page - 1}"/></s:a></li>                                 
-                                                            <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page - 1}"/></s:a></li>
+                                                            <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page}"/></s:a></li>
                                                             </s:else>
                                                         </s:elseif>
                                                 </ul>
                                             </nav>
                                         </s:if>
+                                        <s:else>
+                                            <h3 style="text-align: center">No result found!</h3>
+                                        </s:else>
                                     </s:if>                                    
                                 </div>
                             </div>

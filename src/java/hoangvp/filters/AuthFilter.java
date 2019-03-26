@@ -92,6 +92,9 @@ public class AuthFilter implements Filter {
         guide.add("searchTourStaff.jsp");
         guide.add("searchTourStaff");
         guide.add("searchTourStaff.action");
+        guide.add("destinationStaff.jsp");
+        guide.add("viewAllDestinationsStaff");
+        guide.add("viewAllDestinationsStaff.action");
         
         //ADMIN
         admin = new ArrayList<>();
@@ -102,6 +105,12 @@ public class AuthFilter implements Filter {
         admin.add("searchTourStaff.jsp");
         admin.add("searchTourStaff");
         admin.add("searchTourStaff.action");
+        admin.add("addDestination.jsp");
+        admin.add("addDestination");
+        admin.add("addDestination.action");
+        admin.add("destinationStaff.jsp");
+        admin.add("viewAllDestinationsStaff");
+        admin.add("viewAllDestinationsStaff.action");
 
     }
 

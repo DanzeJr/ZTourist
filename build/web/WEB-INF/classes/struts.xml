@@ -60,5 +60,12 @@
         <action name="searchTourStaff" class="hoangvp.actions.SearchTourStaffAction">
             <result name="success">searchTourStaff.jsp</result>
         </action>
+        <action name="viewAllDestinationsStaff" class="hoangvp.actions.ViewAllDestinationsStaffAction">
+            <result name="success">destinationStaff.jsp</result>
+        </action>
+        <action name="addDestination" class="hoangvp.actions.AddDestinationAction">
+            <result name="input">addDestination.jsp</result>
+            <result name="success" type="redirectAction">viewAllDestinationsStaff</result>
+        </action>
     </package>
 </struts>

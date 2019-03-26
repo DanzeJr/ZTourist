@@ -30,7 +30,7 @@
         *************************************-->
         <nav id="menu">
             <ul>
-                <li><s:a href="index.jsp">Home</s:a>
+                <li><s:a href="''">Home</s:a>
                     </li>
                     <li><a href="destinations.html">Destinations</a></li>
                     <li><a href="javascript:void(0);">Tour Packages</a>

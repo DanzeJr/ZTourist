@@ -110,7 +110,9 @@ public class TourDAO implements Serializable{
             while (rs.next()) {
                 placeID = rs.getString("PlaceID");
                 name = rs.getString("Name");
-                dto = new PlaceDTO(placeID, name);
+                dto = new PlaceDTO();
+                dto.setId(placeID);
+                dto.setName(name);
                 result.add(dto);
             }
         } finally {
@@ -259,7 +261,7 @@ public class TourDAO implements Serializable{
                     + " AND FareAdult >= ? AND FareAdult <= ?"
                     + " AND DATEDIFF(hour, FromDate, ToDate) <= ?"
                     + " AND ID IN (SELECT TourID AS ID FROM tblTourDetail WHERE PlaceID = ?)"
-                    + " AND ID = ? AND Name = ?";
+                    + " AND ID = ? AND Name LIKE ?";
             int i = 0;
                         
             if (priceMin < 0) {
@@ -276,11 +278,11 @@ public class TourDAO implements Serializable{
             if (dest.equalsIgnoreCase("-1")) {
                 sql = sql.replace(" AND ID IN (SELECT TourID AS ID FROM tblTourDetail WHERE PlaceID = ?)", "");
             }
-            if (id == null) {
+            if (id.isEmpty()) {
                 sql = sql.replace(" AND ID = ?", "");
             }
-            if (name == null) {
-                sql = sql.replace(" AND Name = ?", "");
+            if (name.isEmpty()) {
+                sql = sql.replace(" AND Name LIKE ?", "");
             }
             
             pre = conn.prepareStatement(sql);
@@ -300,11 +302,11 @@ public class TourDAO implements Serializable{
             if (!dest.equalsIgnoreCase("-1")) {
                 pre.setString(++i, dest);
             }
-            if (id != null) {
+            if (!id.isEmpty()) {
                 pre.setString(++i, id);
             }
-            if (name != null) {
-                pre.setString(++i, name);
+            if (!name.isEmpty()) {
+                pre.setString(++i, "%" + name + "%");
             }
             rs = pre.executeQuery();
             if (rs.next()) {
@@ -331,7 +333,7 @@ public class TourDAO implements Serializable{
                     + " AND FareAdult >= ? AND FareAdult <= ?"
                     + " AND DATEDIFF(hour, FromDate, ToDate) <= ?"
                     + " AND ID IN (SELECT TourID AS ID FROM tblTourDetail WHERE PlaceID = ?)"
-                    + " AND ID = ? AND Name = ?"
+                    + " AND ID = ? AND Name LIKE ?"
                     + " ORDER BY FromDate"
                     + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
             int i = 0;
@@ -350,11 +352,11 @@ public class TourDAO implements Serializable{
             if (dest.equalsIgnoreCase("-1")) {
                 sql = sql.replace(" AND ID IN (SELECT TourID AS ID FROM tblTourDetail WHERE PlaceID = ?)", "");
             }
-            if (tourID == null) {
+            if (tourID.isEmpty()) {
                 sql = sql.replace(" AND ID = ?", "");
             }
-            if (tourName == null) {
-                sql = sql.replace(" AND Name = ?", "");
+            if (tourName.isEmpty()) {
+                sql = sql.replace(" AND Name LIKE ?", "");
             }
             
             pre = conn.prepareStatement(sql);
@@ -374,11 +376,11 @@ public class TourDAO implements Serializable{
             if (!dest.equalsIgnoreCase("-1")) {
                 pre.setString(++i, dest);
             }
-            if (tourID != null) {
+            if (!tourID.isEmpty()) {
                 pre.setString(++i, tourID);
             }
-            if (tourName != null) {
-                pre.setString(++i, tourName);
+            if (!tourName.isEmpty()) {
+                pre.setString(++i, "%" + tourName + "%");
             }
             pre.setInt(++i, skip);
             pre.setInt(++i, fetch);

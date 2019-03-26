@@ -39,34 +39,34 @@
                 <li><a href="viewAllDestinationsStaff">Destinations</a>
                     <ul>
                         <s:if test="%{#session.ROLE == 'admin'}">
-                        <li><a href="addDestination.jsp">Add new destination</a></li>                    
-                        </s:if>
+                            <li><a href="addDestination.jsp">Add new destination</a></li>                    
+                            </s:if>
                         <li><a href="searchDest">Search destination</a></li>
                     </ul>
                 </li>
                 <li><a href="viewAllTour">Tours</a>
                     <s:if test="%{#session.ROLE == 'admin'}">
-                    <ul>
-                        <li><a href="addTour.jsp">Add new tour</a></li>
-                    </ul>
+                        <ul>
+                            <li><a href="addTour.jsp">Add new tour</a></li>
+                        </ul>
                     </s:if>
                 </li>
                 <s:if test="%{#session.ROLE == 'guide'}">
-                <li><a href="viewAllTasks">Schedule Task</a></li>
-                </s:if>
-                <s:if test="%{#session.ROLE == 'admin'}">
-                <li><a href="viewAllStaffs">Staffs</a>
-                    <ul>
-                        <li><a href="addStaff.jsp">Add new staff</a></li>
-                    </ul>
-                </li>
+                    <li><a href="viewAllTasks">Schedule Task</a></li>
+                    </s:if>
+                    <s:if test="%{#session.ROLE == 'admin'}">
+                    <li><a href="viewAllStaffs">Staffs</a>
+                        <ul>
+                            <li><a href="addStaff.jsp">Add new staff</a></li>
+                        </ul>
+                    </li>
                 </s:if>                
                 <s:if test="%{#session.ROLE == 'admin'}">
-                <li><a href="checkBooking">Check Booking</a></li>
-                </s:if>
-                <s:if test="%{#session.ROLE == 'admin'}">
-                <li><a href="viewAllSaleCodes">Promotion Codes</a></li>
-                </s:if>
+                    <li><a href="checkBooking">Check Booking</a></li>
+                    </s:if>
+                    <s:if test="%{#session.ROLE == 'admin'}">
+                    <li><a href="viewAllSaleCodes">Promotion Codes</a></li>
+                    </s:if>
             </ul>
         </nav>
         <!--************************************
@@ -135,8 +135,8 @@
                                 </div>
                                 <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
                                     <ul>
-                                        <li class="menu-item-has-children current-menu-item"><a href="homeStaff.jsp">Home</a></li>
-                                        <li class="menu-item-has-children"><a href="viewAllDestinationsStaff">Destinations</a>
+                                        <li class="menu-item-has-children"><a href="homeStaff.jsp">Home</a></li>
+                                        <li class="menu-item-has-children  current-menu-item"><a href="viewAllDestinationsStaff">Destinations</a>
                                             <ul class="sub-menu">
                                                 <s:if test="%{#session.ROLE == 'admin'}">
                                                     <li><a href="addDestination.jsp">Add new destination</a></li>                    
@@ -153,22 +153,22 @@
                                         </li>
                                         <s:if test="%{#session.ROLE == 'guide'}">
                                             <li><a href="viewAllTasks">Schedule Task</a></li>
-                                        </s:if>
-                                        <s:if test="%{#session.ROLE == 'admin'}">
-                                            <li class="menu-item-has-children"><a href="viewAllStaffs">Staffs</a>
-                                            <s:if test="%{#session.ROLE == 'admin'}">
-                                                <ul class="sub-menu">
-                                                    <li><a href="addStaff.jsp">Add new staff</a></li>
-                                                </ul>
                                             </s:if>
+                                            <s:if test="%{#session.ROLE == 'admin'}">
+                                            <li class="menu-item-has-children"><a href="viewAllStaffs">Staffs</a>
+                                                <s:if test="%{#session.ROLE == 'admin'}">
+                                                    <ul class="sub-menu">
+                                                        <li><a href="addStaff.jsp">Add new staff</a></li>
+                                                    </ul>
+                                                </s:if>
                                             </li>
                                         </s:if>                
                                         <s:if test="%{#session.ROLE == 'admin'}">
                                             <li><a href="checkBooking">Check Booking</a></li>
-                                        </s:if>
-                                        <s:if test="%{#session.ROLE == 'admin'}">
+                                            </s:if>
+                                            <s:if test="%{#session.ROLE == 'admin'}">
                                             <li><a href="viewAllSaleCodes">Promotion Codes</a></li>
-                                        </s:if>
+                                            </s:if>
                                     </ul>
                                 </div>
                             </nav>
@@ -248,8 +248,115 @@
             <!--************************************
                             Main Start
             *************************************-->
-            <main id="tg-main" class="tg-main tg-haslayout">
-                
+            <main id="tg-main" class="tg-main tg-sectionspace tg-haslayout">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div id="tg-content" class="tg-content">
+                                <div class="tg-listing tg-listingvtwo">
+                                    <div class="tg-sectiontitle">
+                                        <h2>Destinations</h2>
+                                    </div>
+                                    <s:if test="%{listPlace != null}">
+                                        <s:if test="%{!listPlace.isEmpty()}">                                            
+                                            <div class="clearfix"></div>
+                                            <div class="row">
+                                                <s:iterator value="%{listPlace}">
+                                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+                                                        <div class="tg-trendingtrip">
+                                                            <figure>
+                                                                <a href="javascript:void(0);">
+                                                                    <img style="width: 401px; height: 250px" src="<s:property value="%{titleImage}"/>" alt="destination image">
+                                                                    <div class="tg-hover">
+                                                                        <span class="tg-locationname"><s:property value="%{id}"/></span>
+                                                                        <div class="tg-pricearea">
+                                                                            <h4><s:property value="%{country}"/></h4>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            </figure>
+                                                            <div class="tg-populartourcontent">
+                                                                <div class="tg-populartourtitle">
+                                                                    <h3><a href="javascript:void(0);"><s:property value="%{name}"/></a></h3>
+                                                                </div>
+                                                                <div class="tg-description">
+                                                                    <p><s:property value="%{des}"/></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </s:iterator>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <nav class="tg-pagination">
+                                                <ul>
+                                                    <s:if test="%{totalPages >= 3}"> <%-- if there is 3 or more than 3 pages --%>
+                                                        <s:url action="viewAllDestinationsStaff" var="nextPage">
+                                                            <s:param name="page" value="%{page + 1}" />
+                                                            <s:param name="skipPage" value="%{skipPage + 6}"/>
+                                                        </s:url>
+                                                        <s:url action="viewAllDestinationsStaff" var="prePage">
+                                                            <s:param name="page" value="%{page - 1}" />
+                                                            <s:param name="skipPage" value="%{skipPage - 6}"/>
+                                                        </s:url>
+                                                        <s:if test="%{page == 1}"> <%-- if first page is active --%>
+                                                            <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page}"/></s:a></li>                                                
+                                                            <li><s:a href="%{nextPage}"><s:property value="%{page + 1}"/></s:a></li>
+                                                                <s:url action="viewAllDestinationsStaff" var="toPage">
+                                                                    <s:param name="page" value="%{page + 2}" />
+                                                                    <s:param name="skipPage" value="%{skipPage + 12}"/>
+                                                                </s:url>
+                                                            <li><s:a href="%{toPage}"><s:property value="%{page + 2}"/></s:a></li>
+                                                            <li class="tg-nextpage"><s:a href="%{nextPage}"><i class="fa fa-angle-right"></i></s:a></li>
+                                                            </s:if>
+                                                            <s:elseif test="%{page == totalPages}"> <%-- if last page is active --%>
+                                                                <s:url action="viewAllDestinationsStaff" var="toPage">
+                                                                    <s:param name="page" value="%{page - 2}" />
+                                                                    <s:param name="skipPage" value="%{skipPage - 12}"/>
+                                                                </s:url>    
+                                                            <li class="tg-prevpage"><s:a href="%{toPage}"><i class="fa fa-angle-left"></i></s:a></li>
+                                                            <li><s:a href="%{toPage}"><s:property value="%{page - 2}"/></s:a></li>                                                
+                                                            <li><s:a href="%{prePage}"><s:property value="%{page - 1}"/></s:a></li>
+                                                            <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page}"/></s:a></li>
+                                                            </s:elseif>
+                                                            <s:else> <%-- if neither first and last page is active --%>
+                                                            <li class="tg-prevpage"><s:a href="%{prePage}"><i class="fa fa-angle-left"></i></s:a></li>
+                                                            <li><s:a href="%{prevPage}"><s:property value="%{page - 1}"/></s:a></li>
+                                                            <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page}"/></s:a></li>
+                                                            <li><s:a href="%{nextPage}"><s:property value="%{page + 1}"/></s:a></li>
+                                                            <li class="tg-nextpage"><s:a href="%{nextPage}"><i class="fa fa-angle-right"></i></s:a></li>
+                                                            </s:else>
+                                                        </s:if>
+                                                        <s:elseif test="%{totalPages == 1}"> <%-- else if only one page show --%>
+                                                        <li class="tg-active"><s:a href="javascript:void(0);">1</s:a></li>
+                                                        </s:elseif>
+                                                        <s:elseif test="%{totalPages == 2}"> <%-- else if only two pages show --%>
+                                                            <s:url action="viewAllDestinationsStaff" var="nextPage">
+                                                                <s:param name="page" value="%{page + 1}" />
+                                                                <s:param name="skipPage" value="%{skipPage + 6}"/>
+                                                            </s:url>
+                                                            <s:url action="viewAllDestinationsStaff" var="prePage">
+                                                                <s:param name="page" value="%{page - 1}" />
+                                                                <s:param name="skipPage" value="%{skipPage - 6}"/>
+                                                            </s:url>
+                                                            <s:if test="%{page == 1}"> <%-- if page 1 is active --%>
+                                                            <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page}"/></s:a></li>                                                
+                                                            <li><s:a href="%{nextPage}"><s:property value="%{page + 1}"/></s:a></li>
+                                                            </s:if>
+                                                            <s:else> <%-- if page 2 is active --%>
+                                                            <li><s:a href="%{prePage}"><s:property value="%{page - 1}"/></s:a></li>                                 
+                                                            <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page}"/></s:a></li>
+                                                            </s:else>
+                                                        </s:elseif>
+                                                </ul>
+                                            </nav>
+                                        </s:if>
+                                    </s:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
             <!--************************************
                             Main End
@@ -367,7 +474,7 @@
                 $('#datetimepicker1').data('DateTimePicker').show();
             });
             $("#datetimepicker2").attr("placeholder", "From Date");
-            
+
             /* -------------------------------------
              PRETTY PHOTO GALLERY
              -------------------------------------- */

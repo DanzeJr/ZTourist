@@ -36,29 +36,36 @@
         <nav id="menu">
             <ul>
                 <li><a href="homeStaff.jsp">Home</a></li>
-                <li><a href="destinations.html">Destinations</a></li>
-                <li><a href="javascript:void(0);">Tours</a>
+                <li><a href="viewAllDestinationsStaff">Destinations</a>
                     <ul>
-                        <li><a href="viewAllTours">View All Tours</a></li>
-                        <li><a href="packages.html">Add new tour</a></li>
-                        <li><a href="aboutus.html">Edit tours</a></li>
-                        <li><a href="contactus.html">Contact us</a></li>
-                        <li><a href="billingdetail.html">Billing Detail</a></li>
-                        <li><a href="404error.html">404 Error</a></li>
-                        <li><a href="comingsoon.html">Coming Soon</a></li>
-                        <li><a href="cart.html">cart</a></li>
-                        <li>
-                            <a href="javascript:void(0);">Tours</a>
-                            <ul>
-                                <li><a href="tourcatagory.html">Tour Catagory</a></li>
-                                <li><a href="tourbookingdetail.html">Tour Detail</a></li>
-                                <li><a href="tourpaymentdetail.html">Tour Payment</a></li>
-                            </ul>
-                        </li>
+                        <s:if test="%{#session.ROLE == 'admin'}">
+                        <li><a href="addDestination.jsp">Add new destination</a></li>                    
+                        </s:if>
+                        <li><a href="searchDest">Search destination</a></li>
                     </ul>
                 </li>
-                <s:if test="%{#session.ROLE == null}">
-                <li><a href="loginStaff.jsp">For Staff Only</a></li>
+                <li><a href="viewAllTour">Tours</a>
+                    <s:if test="%{#session.ROLE == 'admin'}">
+                    <ul>
+                        <li><a href="addTour.jsp">Add new tour</a></li>
+                    </ul>
+                    </s:if>
+                </li>
+                <s:if test="%{#session.ROLE == 'guide'}">
+                <li><a href="viewAllTasks">Schedule Task</a></li>
+                </s:if>
+                <s:if test="%{#session.ROLE == 'admin'}">
+                <li><a href="viewAllStaffs">Staffs</a>
+                    <ul>
+                        <li><a href="addStaff.jsp">Add new staff</a></li>
+                    </ul>
+                </li>
+                </s:if>                
+                <s:if test="%{#session.ROLE == 'admin'}">
+                <li><a href="checkBooking">Check Booking</a></li>
+                </s:if>
+                <s:if test="%{#session.ROLE == 'admin'}">
+                <li><a href="viewAllSaleCodes">Promotion Codes</a></li>
                 </s:if>
             </ul>
         </nav>
@@ -129,8 +136,39 @@
                                 <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
                                     <ul>
                                         <li class="menu-item-has-children current-menu-item"><a href="homeStaff.jsp">Home</a></li>
-                                        <li><a href="destinations.html">destinations</a></li>
-                                        <li class="menu-item-has-children menu-item-has-mega-menu"><a href="javascript:void(0);">listings</a></li>
+                                        <li class="menu-item-has-children"><a href="viewAllDestinationsStaff">Destinations</a>
+                                            <ul class="sub-menu">
+                                                <s:if test="%{#session.ROLE == 'admin'}">
+                                                    <li><a href="addDestination.jsp">Add new destination</a></li>                    
+                                                    </s:if>
+                                                <li><a href="searchDest">Search destination</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="menu-item-has-children"><a href="viewAllTour">Tours</a>
+                                            <s:if test="%{#session.ROLE == 'admin'}">
+                                                <ul class="sub-menu">
+                                                    <li><a href="addTour.jsp">Add new tour</a></li>
+                                                </ul>
+                                            </s:if>
+                                        </li>
+                                        <s:if test="%{#session.ROLE == 'guide'}">
+                                            <li><a href="viewAllTasks">Schedule Task</a></li>
+                                        </s:if>
+                                        <s:if test="%{#session.ROLE == 'admin'}">
+                                            <li class="menu-item-has-children"><a href="viewAllStaffs">Staffs</a>
+                                            <s:if test="%{#session.ROLE == 'admin'}">
+                                                <ul class="sub-menu">
+                                                    <li><a href="addStaff.jsp">Add new staff</a></li>
+                                                </ul>
+                                            </s:if>
+                                            </li>
+                                        </s:if>                
+                                        <s:if test="%{#session.ROLE == 'admin'}">
+                                            <li><a href="checkBooking">Check Booking</a></li>
+                                        </s:if>
+                                        <s:if test="%{#session.ROLE == 'admin'}">
+                                            <li><a href="viewAllSaleCodes">Promotion Codes</a></li>
+                                        </s:if>
                                     </ul>
                                 </div>
                             </nav>
@@ -211,574 +249,7 @@
                             Main Start
             *************************************-->
             <main id="tg-main" class="tg-main tg-haslayout">
-                <!--************************************
-                                Our Destination Start
-                *************************************-->
-                <section class="tg-sectionspace tg-bgdark tg-haslayout">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <div class="tg-sectionhead tg-sectionheadvtwo">
-                                    <div class="tg-sectiontitle">
-                                        <h2>Top Destinations</h2>
-                                    </div>
-                                    <div class="tg-description">
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam consectetuer.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <div class="tg-themetabs tg-themetabsvtwo">
-                                    <ul class="tg-themetabnav" role="tablist">
-                                        <li role="presentation" class="active"><a href="#northamerica" role="tab" data-toggle="tab"><strong>North america</strong></a></li>
-                                        <li role="presentation"><a href="#europe" aria-controls="europe" role="tab" data-toggle="tab"><strong>Europe</strong></a></li>
-                                        <li role="presentation"><a href="#africa" aria-controls="africa" role="tab" data-toggle="tab"><strong>africa</strong></a></li>
-                                        <li role="presentation"><a href="#asia" aria-controls="asia" role="tab" data-toggle="tab"><strong>asia</strong></a></li>
-                                        <li role="presentation"><a href="#southamerica" aria-controls="southamerica" role="tab" data-toggle="tab"><strong>south america</strong></a></li>
-                                    </ul>
-                                    <div class="tab-content tg-themetabcontent">
-                                        <div role="tabpanel" class="tab-pane active" id="america">
-                                            <div class="tg-topdestinationslider tg-populardestinations owl-carousel">
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-11.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Paris</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>Beautiful City in the World</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-12.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Dubai</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-13.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Istanbul</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-14.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">london</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" id="europe">
-                                            <div class="tg-topdestinationslider tg-populardestinations owl-carousel">
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-11.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Paris</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>Beautiful City in the World</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-12.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Dubai</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-13.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Istanbul</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-14.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">london</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" id="africa">
-                                            <div class="tg-topdestinationslider tg-populardestinations owl-carousel">
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-11.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Paris</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>Beautiful City in the World</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-12.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Dubai</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-13.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Istanbul</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-14.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">london</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" id="asia">
-                                            <div class="tg-topdestinationslider tg-populardestinations owl-carousel">
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-11.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Paris</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>Beautiful City in the World</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-12.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Dubai</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-13.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Istanbul</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-14.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">london</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" id="southamerica">
-                                            <div class="tg-topdestinationslider tg-populardestinations owl-carousel">
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-11.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Paris</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>Beautiful City in the World</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-12.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Dubai</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-13.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">Istanbul</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                                <div class="item tg-populardestination">
-                                                    <figure>
-                                                        <a href="javascript:void(0);"><img src="images/tours/img-14.jpg" alt="image destinations"></a>
-                                                        <figcaption>
-                                                            <h3><a href="javascript:void(0);">london</a></h3>
-                                                            <div class="tg-description">
-                                                                <p>in the streets of London</p>
-                                                            </div>
-                                                        </figcaption>
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="tg-ourdestination">
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 tg-verticalmiddle">
-                                    <figure><img src="images/placeholder/placeholder-01.png" alt="image destinations"></figure>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 tg-verticalmiddle">
-                                    <div class="tg-ourdestinationcontent">
-                                        <div class="tg-sectiontitle tg-sectiontitleleft">
-                                            <h2>Popular Tours</h2>
-                                        </div>
-                                        <div class="tg-description"><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam consectetuer adipiscing elit, sed diam nonummy nibh...</p></div>
-                                        <ul class="tg-destinations">
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <h3>Europe</h3>
-                                                    <em>(05)</em>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <h3>Africa</h3>
-                                                    <em>(15)</em>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <h3>Asia</h3>
-                                                    <em>(12)</em>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <h3>Oceania</h3>
-                                                    <em>(02)</em>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <h3>North America</h3>
-                                                    <em>(08)</em>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0);">
-                                                    <h3>South America</h3>
-                                                    <em>(27)</em>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <a class="tg-btn" href="javascript:void(0);"><span>all destinations</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!--************************************
-                                Our Destination End
-                *************************************-->
-                <!--************************************
-                                Popular Tours Start
-                *************************************-->
-                <section class="tg-sectionspace tg-haslayout">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <div class="tg-sectionhead tg-sectionheadvtwo">
-                                    <div class="tg-sectiontitle">
-                                        <h2>Popular Tours</h2>
-                                    </div>
-                                    <div class="tg-description">
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam consectetuer</p>
-                                    </div>
-                                </div>
-                                <div id="tg-populartoursslider" class="tg-populartoursslider tg-populartours owl-carousel">
-                                    <div class="item tg-populartour">
-                                        <figure>
-                                            <a href="javascript:void(0);"><img src="images/tours/img-01.jpg" alt="image destinations"></a>
-                                            <span class="tg-descount">25% Off</span>
-                                        </figure>
-                                        <div class="tg-populartourcontent">
-                                            <div class="tg-populartourtitle">
-                                                <h3><a href="javascript:void(0);">City Tours in Europe, Paris</a></h3>
-                                            </div>
-                                            <div class="tg-description">
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh...</p>
-                                            </div>
-                                            <div class="tg-populartourfoot">
-                                                <div class="tg-durationrating">
-                                                    <span class="tg-tourduration">7 Days</span>
-                                                    <span class="tg-stars"><span></span></span>
-                                                    <em>(3 Review)</em>
-                                                </div>
-                                                <div class="tg-pricearea">
-                                                    <del>$2,800</del>
-                                                    <h4>$2,500</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item tg-populartour">
-                                        <figure><a href="javascript:void(0);"><img src="images/tours/img-02.jpg" alt="image destinations"></a></figure>
-                                        <div class="tg-populartourcontent">
-                                            <div class="tg-populartourtitle">
-                                                <h3><a href="javascript:void(0);">Best of Canada Tours and Travel</a></h3>
-                                            </div>
-                                            <div class="tg-description">
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh...</p>
-                                            </div>
-                                            <div class="tg-populartourfoot">
-                                                <div class="tg-durationrating">
-                                                    <span class="tg-tourduration">7 Days</span>
-                                                    <span class="tg-stars"><span></span></span>
-                                                    <em>(3 Review)</em>
-                                                </div>
-                                                <div class="tg-pricearea">
-                                                    <span>from</span>
-                                                    <h4>$600</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item tg-populartour">
-                                        <figure><a href="javascript:void(0);"><img src="images/tours/img-03.jpg" alt="image destinations"></a></figure>
-                                        <div class="tg-populartourcontent">
-                                            <div class="tg-populartourtitle">
-                                                <h3><a href="javascript:void(0);">Italy – 3 Days in Rome, Golden Gate</a></h3>
-                                            </div>
-                                            <div class="tg-description">
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh...</p>
-                                            </div>
-                                            <div class="tg-populartourfoot">
-                                                <div class="tg-durationrating">
-                                                    <span class="tg-tourduration">7 Days</span>
-                                                    <span class="tg-stars"><span></span></span>
-                                                    <em>(3 Review)</em>
-                                                </div>
-                                                <div class="tg-pricearea">
-                                                    <span>from</span>
-                                                    <h4>$1,430</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item tg-populartour">
-                                        <figure><a href="javascript:void(0);"><img src="images/tours/img-04.jpg" alt="image destinations"></a></figure>
-                                        <div class="tg-populartourcontent">
-                                            <div class="tg-populartourtitle">
-                                                <h3><a href="javascript:void(0);">Best of Canada Tours and Travel</a></h3>
-                                            </div>
-                                            <div class="tg-description">
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh...</p>
-                                            </div>
-                                            <div class="tg-populartourfoot">
-                                                <div class="tg-durationrating">
-                                                    <span class="tg-tourduration">7 Days</span>
-                                                    <span class="tg-stars"><span></span></span>
-                                                    <em>(3 Review)</em>
-                                                </div>
-                                                <div class="tg-pricearea">
-                                                    <span>from</span>
-                                                    <h4>$600</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!--************************************
-                                Popular Tours End
-                *************************************-->
-                <!--************************************
-                                Features Start
-                *************************************-->
-                <section class="tg-parallax" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/parallax/bgparallax-02.jpg">
-                    <div class="tg-sectionspace tg-haslayout">
-                        <div class="container">
-                            <div class="row">
-                                <div class="tg-features">
-                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                        <div class="tg-feature">
-                                            <div class="tg-featuretitle">
-                                                <h2><span>01</span><a href="javascript:void(0);">Luxury Hotels</a></h2>
-                                            </div>
-                                            <div class="tg-description">
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh tempor cum soluta nobis consectetuer nihil imperdiet doming...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                        <div class="tg-feature">
-                                            <div class="tg-featuretitle">
-                                                <h2><span>02</span><a href="javascript:void(0);">Tourist Guide</a></h2>
-                                            </div>
-                                            <div class="tg-description">
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh tempor cum soluta nobis consectetuer nihil imperdiet doming...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                                        <div class="tg-feature">
-                                            <div class="tg-featuretitle">
-                                                <h2><span>03</span><a href="javascript:void(0);">Flights Tickets</a></h2>
-                                            </div>
-                                            <div class="tg-description">
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh tempor cum soluta nobis consectetuer nihil imperdiet doming...</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!--************************************
-                                Features End
-                *************************************-->
-                <!--************************************
-                                Article Start
-                *************************************-->
-                <section class="tg-sectionspace tg-haslayout">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <div class="tg-sectionhead tg-sectionheadvtwo">
-                                    <div class="tg-sectiontitle">
-                                        <h2>Latest Articles</h2>
-                                    </div>
-                                    <div class="tg-description">
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam consectetuer</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tg-posts">
-                                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                    <article class="tg-post">
-                                        <figure>
-                                            <a href="javascript:void(0);">
-                                                <img src="images/blog/img-01.jpg" alt="image description">
-                                                <div class="tg-hover">
-                                                    <h3>Bungee Jumping Trip</h3>
-                                                    <time datetime="2017-06-08">Feb 22, 2017</time>
-                                                </div>
-                                            </a>
-                                        </figure>
-                                    </article>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                    <article class="tg-post">
-                                        <figure>
-                                            <a href="javascript:void(0);">
-                                                <img src="images/blog/img-02.jpg" alt="image description">
-                                                <div class="tg-hover">
-                                                    <h3>Bungee Jumping Trip</h3>
-                                                    <time datetime="2017-06-08">Feb 22, 2017</time>
-                                                </div>
-                                            </a>
-                                        </figure>
-                                    </article>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                    <article class="tg-post">
-                                        <figure>
-                                            <a href="javascript:void(0);">
-                                                <img src="images/blog/img-03.jpg" alt="image description">
-                                                <div class="tg-hover">
-                                                    <h3>Bungee Jumping Trip</h3>
-                                                    <time datetime="2017-06-08">Feb 22, 2017</time>
-                                                </div>
-                                            </a>
-                                        </figure>
-                                    </article>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                                    <article class="tg-post">
-                                        <figure>
-                                            <a href="javascript:void(0);">
-                                                <img src="images/blog/img-04.jpg" alt="image description">
-                                                <div class="tg-hover">
-                                                    <h3>Bungee Jumping Trip</h3>
-                                                    <time datetime="2017-06-08">Feb 22, 2017</time>
-                                                </div>
-                                            </a>
-                                        </figure>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!--************************************
-                                Article End
-                *************************************-->
+                
             </main>
             <!--************************************
                             Main End

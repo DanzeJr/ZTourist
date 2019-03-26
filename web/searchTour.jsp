@@ -439,12 +439,15 @@
                                                     </s:if>
                                                     <s:else> <%-- if page 2 is active --%>
                                                         <li><s:a href="%{prePage}"><s:property value="%{page - 1}"/></s:a></li>                                 
-                                                        <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page - 1}"/></s:a></li>
+                                                        <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page}"/></s:a></li>
                                                     </s:else>
                                                 </s:elseif>
                                             </ul>
                                         </nav>
                                     </s:if>
+                                    <s:else>
+                                        <h3 style="text-align: center">No result found!</h3>
+                                    </s:else>
                                 </s:if>                                    
                             </div>
                         </div>

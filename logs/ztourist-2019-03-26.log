@@ -1,0 +1,7 @@
+2019-03-26 12:04:37 ERROR SearchTourStaffAction:87 - The index 2 is out of range.
+2019-03-26 12:04:45 ERROR SearchTourStaffAction:87 - The index 2 is out of range.
+2019-03-26 12:06:07 ERROR SearchTourStaffAction:87 - The index 2 is out of range.
+2019-03-26 12:06:31 ERROR SearchTourStaffAction:87 - The index 2 is out of range.
+2019-03-26 12:07:31 ERROR SearchTourStaffAction:87 - The index 2 is out of range.
+2019-03-26 19:07:19 ERROR AddDestinationAction:56 - null
+2019-03-26 20:54:42 ERROR AddDestinationAction:57 - Cannot insert the value NULL into column 'ID', table 'ZTourist.dbo.tblPlace'; column does not allow nulls. INSERT fails.

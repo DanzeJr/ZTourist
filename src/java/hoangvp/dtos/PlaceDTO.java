@@ -12,12 +12,18 @@ import java.io.Serializable;
  * @author Danze
  */
 public class PlaceDTO implements Serializable{
-    private String id, name, des, country;
+    private String id, name, titleImage, des, country, status;
 
-    public PlaceDTO(String id, String name) {
+    public PlaceDTO() {
+    }
+
+    public PlaceDTO(String id, String name, String titleImage, String des, String country) {
         this.id = id;
         this.name = name;
-    }
+        this.titleImage = titleImage;
+        this.des = des;
+        this.country = country;
+    }    
 
     public String getId() {
         return id;
@@ -50,5 +56,20 @@ public class PlaceDTO implements Serializable{
     public void setCountry(String country) {
         this.country = country;
     }
-        
+
+    public String getTitleImage() {
+        return titleImage;
+    }
+
+    public void setTitleImage(String titleImage) {
+        this.titleImage = titleImage;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

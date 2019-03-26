@@ -318,9 +318,12 @@
                                 <s:if test="%{listTour != null}">
                                     <s:if test="%{!listTour.isEmpty()}">
                                         <s:iterator value="%{listTour}">
-                                            <div class="tg-populartour tg-populartourvtwo">                                      
+                                            <div class="tg-populartour tg-populartourvtwo">
+                                                <s:url action="viewTourDetails" var="tourDetails">
+                                                    <s:param name="tourID" value="%{id}" />
+                                                </s:url>
                                                 <figure>
-                                                    <s:a href="tourbookingdetail.jsp"><img style="width: 401px; height: 285px;" src="<s:property value="%{titleImage}"/>" alt="image destinations"></s:a>
+                                                    <s:a href="%{tourDetails}"><img style="width: 401px; height: 285px;" src="<s:property value="%{titleImage}"/>" alt="tour image"></s:a>
                                                     </figure>
                                                     <div class="tg-populartourcontent">
                                                         <div class="tg-populartourtitle">
@@ -350,7 +353,7 @@
                                                             <span>From</span>
                                                             <h4><s:property value="%{fareAdult}"/>$</h4>
                                                         </div>
-                                                        <s:a cssClass="tg-btn" href="tourbookingdetail.jsp"><span>Explore Tour</span></s:a>
+                                                        <s:a cssClass="tg-btn" href="%{tourDetails}"><span>Explore Tour</span></s:a>
                                                     </div>
                                                 </div>
                                             </div>                                                    

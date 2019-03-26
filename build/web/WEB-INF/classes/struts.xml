@@ -57,5 +57,8 @@
         <action name="signOutStaff" class="hoangvp.actions.SignOutStaffAction">
             <result name="success">loginStaff.jsp</result>
         </action>
+        <action name="searchTourStaff" class="hoangvp.actions.SearchTourStaffAction">
+            <result name="success">searchTourStaff.jsp</result>
+        </action>
     </package>
 </struts>

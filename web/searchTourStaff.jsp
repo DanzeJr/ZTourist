@@ -194,10 +194,13 @@
                                     <s:if test="%{listTour != null}">
                                         <s:if test="%{!listTour.isEmpty()}">
                                             <s:iterator value="%{listTour}">
-                                                <div class="tg-populartour tg-populartourvtwo">                                      
+                                                <div class="tg-populartour tg-populartourvtwo">
+                                                    <s:url action="viewTourDetails" var="tourDetails">
+                                                        <s:param name="tourID" value="%{id}" />
+                                                    </s:url>
                                                     <figure>
-                                                        <s:a href="tourbookingdetail.jsp"><img style="width: 401px; height: 285px;" src="<s:property value="%{titleImage}"/>" alt="image destinations"></s:a>
-                                                        </figure>
+                                                        <s:a href="%{tourDetails}"><img style="width: 401px; height: 285px;" src="<s:property value="%{titleImage}"/>" alt="tour image"></s:a>
+                                                    </figure>
                                                         <div class="tg-populartourcontent">
                                                             <div class="tg-populartourtitle">
                                                                 <h3 style="color: #00aff0"><s:a href="tourbookingdetail.jsp"><s:property value="%{name}"/></s:a></h3>
@@ -225,8 +228,8 @@
                                                             <div class="tg-pricearea">
                                                                 <span>From</span>
                                                                 <h4><s:property value="%{fareAdult}"/>$</h4>
-                                                            </div>
-                                                            <s:a cssClass="tg-btn" href="tourbookingdetail.jsp"><span>View Tour</span></s:a>
+                                                            </div>                                                            
+                                                            <s:a cssClass="tg-btn" href="%{tourDetails}"><span>View Tour</span></s:a>
                                                             </div>
                                                         </div>
                                                     </div>                                                    
@@ -234,7 +237,7 @@
                                             <nav class="tg-pagination">
                                                 <ul>
                                                     <s:if test="%{totalPages >= 3}"> <%-- if there is 3 or more than 3 pages --%>
-                                                        <s:url action="searchTour" var="nextPage">
+                                                        <s:url action="searchTourStaff" var="nextPage">
                                                             <s:param name="page" value="%{page + 1}" />
                                                             <s:param name="skipPage" value="%{skipPage + 5}"/>
                                                             <s:param name="destSearch" value="%{destSearch}"/>
@@ -242,7 +245,7 @@
                                                             <s:param name="durationSearch" value="%{durationSearch}"/>
                                                             <s:param name="priceSearch " value="%{priceSearch}"/>
                                                         </s:url>
-                                                        <s:url action="searchTour" var="prePage">
+                                                        <s:url action="searchTourStaff" var="prePage">
                                                             <s:param name="page" value="%{page - 1}" />
                                                             <s:param name="skipPage" value="%{skipPage - 5}"/>
                                                             <s:param name="destSearch" value="%{destSearch}"/>
@@ -253,7 +256,7 @@
                                                         <s:if test="%{page == 1}"> <%-- if first page is active --%>
                                                             <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page}"/></s:a></li>                                                
                                                             <li><s:a href="%{nextPage}"><s:property value="%{page + 1}"/></s:a></li>
-                                                                <s:url action="searchTour" var="toPage">
+                                                                <s:url action="searchTourStaff" var="toPage">
                                                                     <s:param name="page" value="%{page + 2}" />
                                                                     <s:param name="skipPage" value="%{skipPage + 10}"/>
                                                                     <s:param name="destSearch" value="%{destSearch}"/>
@@ -265,7 +268,7 @@
                                                             <li class="tg-nextpage"><s:a href="%{nextPage}"><i class="fa fa-angle-right"></i></s:a></li>
                                                             </s:if>
                                                             <s:elseif test="%{page == totalPages}"> <%-- if last page is active --%>
-                                                                <s:url action="searchTour" var="toPage">
+                                                                <s:url action="searchTourStaff" var="toPage">
                                                                     <s:param name="page" value="%{page - 2}" />
                                                                     <s:param name="skipPage" value="%{skipPage - 10}"/>
                                                                     <s:param name="destSearch" value="%{destSearch}"/>
@@ -290,7 +293,7 @@
                                                         <li class="tg-active"><s:a href="javascript:void(0);">1</s:a></li>
                                                         </s:elseif>
                                                         <s:elseif test="%{totalPages == 2}"> <%-- else if only two pages show --%>
-                                                            <s:url action="searchTour" var="nextPage">
+                                                            <s:url action="searchTourStaff" var="nextPage">
                                                                 <s:param name="page" value="%{page + 1}" />
                                                                 <s:param name="skipPage" value="%{skipPage + 5}"/>
                                                                 <s:param name="destSearch" value="%{destSearch}"/>
@@ -298,7 +301,7 @@
                                                                 <s:param name="durationSearch" value="%{durationSearch}"/>
                                                                 <s:param name="priceSearch " value="%{priceSearch}"/>
                                                             </s:url>
-                                                            <s:url action="searchTour" var="prePage">
+                                                            <s:url action="searchTourStaff" var="prePage">
                                                                 <s:param name="page" value="%{page - 1}" />
                                                                 <s:param name="skipPage" value="%{skipPage - 5}"/>
                                                                 <s:param name="destSearch" value="%{destSearch}"/>

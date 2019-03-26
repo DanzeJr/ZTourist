@@ -89,6 +89,9 @@ public class AuthFilter implements Filter {
         guide.add("homeStaff.jsp");
         guide.add("signOutStaff");
         guide.add("signOutStaff.action");
+        guide.add("searchTourStaff.jsp");
+        guide.add("searchTourStaff");
+        guide.add("searchTourStaff.action");
         
         //ADMIN
         admin = new ArrayList<>();
@@ -96,6 +99,9 @@ public class AuthFilter implements Filter {
         admin.add("homeStaff.jsp");
         admin.add("signOutStaff");
         admin.add("signOutStaff.action");
+        admin.add("searchTourStaff.jsp");
+        admin.add("searchTourStaff");
+        admin.add("searchTourStaff.action");
 
     }
 

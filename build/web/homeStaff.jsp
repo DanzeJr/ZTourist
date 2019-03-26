@@ -3,7 +3,7 @@
     Created on : Mar 25, 2019, 10:31:47 PM
     Author     : Danze
 --%>
-
+<%@taglib prefix="s"  uri="/struts-tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">

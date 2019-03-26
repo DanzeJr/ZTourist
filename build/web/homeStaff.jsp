@@ -37,7 +37,29 @@
             <ul>
                 <li><a href="homeStaff.jsp">Home</a></li>
                 <li><a href="destinations.html">Destinations</a></li>
-                <li><a href="javascript:void(0);">Listings</a></li>
+                <li><a href="javascript:void(0);">Tours</a>
+                    <ul>
+                        <li><a href="viewAllTours">View All Tours</a></li>
+                        <li><a href="packages.html">Add new tour</a></li>
+                        <li><a href="aboutus.html">Edit tours</a></li>
+                        <li><a href="contactus.html">Contact us</a></li>
+                        <li><a href="billingdetail.html">Billing Detail</a></li>
+                        <li><a href="404error.html">404 Error</a></li>
+                        <li><a href="comingsoon.html">Coming Soon</a></li>
+                        <li><a href="cart.html">cart</a></li>
+                        <li>
+                            <a href="javascript:void(0);">Tours</a>
+                            <ul>
+                                <li><a href="tourcatagory.html">Tour Catagory</a></li>
+                                <li><a href="tourbookingdetail.html">Tour Detail</a></li>
+                                <li><a href="tourpaymentdetail.html">Tour Payment</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <s:if test="%{#session.ROLE == null}">
+                <li><a href="loginStaff.jsp">For Staff Only</a></li>
+                </s:if>
             </ul>
         </nav>
         <!--************************************
@@ -130,7 +152,7 @@
                                 <h1>Experience the Wonder</h1>
                                 <h2>People don’t take trips, trips take People</h2>
                                 <s:form cssClass="tg-formtheme tg-formtrip" action="searchTourStaff">
-                                    <fieldset>
+                                    <fieldset>                                        
                                         <div class="form-group">
                                             <div class="tg-select">
                                                 <s:select cssClass="selectpicker" name="destSearch" headerKey="-1" headerValue="Destinations" list="%{#request.Dest}" data-live-search="true" data-width="100%"/>
@@ -158,6 +180,12 @@
                                                           5:'1000$ - 1500$', 6:'1500$ - 2000$', 7:'2000$ - 2500$', 8:'Upper 2500$'}" 
                                                           data-live-search="true" data-width="100%"/>
                                             </div>
+                                        </div>
+                                        <div class="form-group" style="height: 50px; margin-top: 10px">
+                                            <s:textfield name="idSearch" style="height: 100%; width: 100%; font-size: 14px" placeholder="Tour ID"/>
+                                        </div>
+                                        <div class="form-group" style="height: 50px; margin-top: 10px">
+                                            <s:textfield name="nameSearch" style="height: 100%; width: 100%; font-size: 14px" placeholder="Tour Name"/>
                                         </div>
                                         <div class="form-group">
                                             <button class="tg-btn" type="submit"><span>find tours</span></button>

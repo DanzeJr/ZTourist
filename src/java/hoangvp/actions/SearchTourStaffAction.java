@@ -21,7 +21,7 @@ public class SearchTourStaffAction extends ActionSupport {
 
     private static Logger logger = LogManager.getLogger(SearchTourStaffAction.class.getName());
 
-    private String destSearch, dateSearch;
+    private String idSearch, nameSearch, destSearch, dateSearch;
     private Integer skipPage, page;
     private int durationSearch, priceSearch, priceMin, priceMax,  totalPages;
     private List<TourDTO> listTour;
@@ -77,9 +77,9 @@ public class SearchTourStaffAction extends ActionSupport {
                     priceMax = -1;
                     break;
             }
-            double total = dao.getTotalSearchTour(destSearch, Timestamp.valueOf(dateSearch), durationSearch, priceMin, priceMax);
+            double total = dao.getTotalSearchTourStaff(idSearch, nameSearch, destSearch, Timestamp.valueOf(dateSearch), durationSearch, priceMin, priceMax);
             totalPages = (int) Math.ceil(total / 5);
-            listTour = dao.findTour(skipPage, 5, destSearch, Timestamp.valueOf(dateSearch), durationSearch, priceMin, priceMax);
+            listTour = dao.findTourStaff(skipPage, 5, idSearch, nameSearch, destSearch, Timestamp.valueOf(dateSearch), durationSearch, priceMin, priceMax);
             for (TourDTO s : listTour) {
                 s.setListPlace(dao.findPlacesByTourID(s.getId()));
             }
@@ -87,6 +87,22 @@ public class SearchTourStaffAction extends ActionSupport {
             logger.error(e.getMessage());
         }
         return SUCCESS;
+    }
+
+    public String getIdSearch() {
+        return idSearch;
+    }
+
+    public void setIdSearch(String idSearch) {
+        this.idSearch = idSearch;
+    }
+
+    public String getNameSearch() {
+        return nameSearch;
+    }
+
+    public void setNameSearch(String nameSearch) {
+        this.nameSearch = nameSearch;
     }
 
     public String getDestSearch() {

@@ -203,7 +203,7 @@
                                                     </figure>
                                                         <div class="tg-populartourcontent">
                                                             <div class="tg-populartourtitle">
-                                                                <h3 style="color: #00aff0"><s:a href="tourbookingdetail.jsp"><s:property value="%{name}"/></s:a></h3>
+                                                                <h3 style="color: #00aff0"><s:a href="%{tourDetails}"><s:property value="%{name}"/></s:a></h3>
                                                                 <br/>
                                                                 <h5>
                                                                 <s:iterator value="%{listPlace}" status="counter">
@@ -213,7 +213,7 @@
                                                             </h5>
                                                         </div>
                                                         <div class="tg-description">
-                                                            <p> - <s:property value="%{desc}"/> <s:a cssStyle="text-decoration:none;" href="toorbookingdetail.jsp">View more...</s:a></p>
+                                                            <p> - <s:property value="%{desc}"/> <s:a cssStyle="text-decoration:none;" href="%{tourDetails}">View more...</s:a></p>
                                                             </div>
                                                             <div class="tg-populartourfoot">
                                                                 <div class="tg-durationrating">
@@ -240,6 +240,8 @@
                                                         <s:url action="searchTourStaff" var="nextPage">
                                                             <s:param name="page" value="%{page + 1}" />
                                                             <s:param name="skipPage" value="%{skipPage + 5}"/>
+                                                            <s:param name="idSearch" value="%{idSearch}"/>
+                                                            <s:param name="nameSearch" value="%{nameSearch}"/>
                                                             <s:param name="destSearch" value="%{destSearch}"/>
                                                             <s:param name="dateSearch" value="%{dateSearch}"/>
                                                             <s:param name="durationSearch" value="%{durationSearch}"/>
@@ -248,6 +250,8 @@
                                                         <s:url action="searchTourStaff" var="prePage">
                                                             <s:param name="page" value="%{page - 1}" />
                                                             <s:param name="skipPage" value="%{skipPage - 5}"/>
+                                                            <s:param name="idSearch" value="%{idSearch}"/>
+                                                            <s:param name="nameSearch" value="%{nameSearch}"/>
                                                             <s:param name="destSearch" value="%{destSearch}"/>
                                                             <s:param name="dateSearch" value="%{dateSearch}"/>
                                                             <s:param name="durationSearch" value="%{durationSearch}"/>
@@ -259,6 +263,8 @@
                                                                 <s:url action="searchTourStaff" var="toPage">
                                                                     <s:param name="page" value="%{page + 2}" />
                                                                     <s:param name="skipPage" value="%{skipPage + 10}"/>
+                                                                    <s:param name="idSearch" value="%{idSearch}"/>
+                                                                    <s:param name="nameSearch" value="%{nameSearch}"/>
                                                                     <s:param name="destSearch" value="%{destSearch}"/>
                                                                     <s:param name="dateSearch" value="%{dateSearch}"/>
                                                                     <s:param name="durationSearch" value="%{durationSearch}"/>
@@ -271,6 +277,8 @@
                                                                 <s:url action="searchTourStaff" var="toPage">
                                                                     <s:param name="page" value="%{page - 2}" />
                                                                     <s:param name="skipPage" value="%{skipPage - 10}"/>
+                                                                    <s:param name="idSearch" value="%{idSearch}"/>
+                                                                    <s:param name="nameSearch" value="%{nameSearch}"/>
                                                                     <s:param name="destSearch" value="%{destSearch}"/>
                                                                     <s:param name="dateSearch" value="%{dateSearch}"/>
                                                                     <s:param name="durationSearch" value="%{durationSearch}"/>
@@ -296,6 +304,8 @@
                                                             <s:url action="searchTourStaff" var="nextPage">
                                                                 <s:param name="page" value="%{page + 1}" />
                                                                 <s:param name="skipPage" value="%{skipPage + 5}"/>
+                                                                <s:param name="idSearch" value="%{idSearch}"/>
+                                                                <s:param name="nameSearch" value="%{nameSearch}"/>
                                                                 <s:param name="destSearch" value="%{destSearch}"/>
                                                                 <s:param name="dateSearch" value="%{dateSearch}"/>
                                                                 <s:param name="durationSearch" value="%{durationSearch}"/>
@@ -304,6 +314,8 @@
                                                             <s:url action="searchTourStaff" var="prePage">
                                                                 <s:param name="page" value="%{page - 1}" />
                                                                 <s:param name="skipPage" value="%{skipPage - 5}"/>
+                                                                <s:param name="idSearch" value="%{idSearch}"/>
+                                                                <s:param name="nameSearch" value="%{nameSearch}"/>
                                                                 <s:param name="destSearch" value="%{destSearch}"/>
                                                                 <s:param name="dateSearch" value="%{dateSearch}"/>
                                                                 <s:param name="durationSearch" value="%{durationSearch}"/>

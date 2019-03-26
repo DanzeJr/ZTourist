@@ -54,5 +54,8 @@
             <result name="login">loginStaff.jsp</result>
             <result name="success">homeStaff.jsp</result>
         </action>
+        <action name="signOutStaff" class="hoangvp.actions.SignOutStaffAction">
+            <result name="success">loginStaff.jsp</result>
+        </action>
     </package>
 </struts>

@@ -93,7 +93,7 @@
                 <header id="tg-header" class="tg-header tg-headervtwo tg-headerfixed tg-haslayout">
                     <div class="container-fluid">
                         <div class="row">
-                            <strong class="tg-logo"><a href="index.html"><img src="images/dbzlogo.png" alt="company logo here"></a></strong>
+                            <strong class="tg-logo"><a href="''"><img src="images/dbzlogo.png" alt="Z Tourist logo"></a></strong>
                             <nav class="tg-infonav" style="padding: 0;">
                                 <ul>
                                 <s:if test="%{#session.ROLE == null || #session.ROLE != 'customer'}">
@@ -102,7 +102,7 @@
                                 <s:else>
                                     <li>
                                         <button class="mytg-btndropdown" id="tg-dropdowndashboard" type="button" data-toggle="dropdown">
-                                            <img style="width: 35px; height: 35px;" src="<s:property value="%{#session.AVA}"/>" alt="image description">
+                                            <img style="width: 35px; height: 35px;" src="<s:property value="%{#session.AVA}"/>" alt="avatar">
                                             <span><s:property value="%{#session.USER}"/></span>
                                             <i class="fa fa-caret-down"></i>
                                         </button>

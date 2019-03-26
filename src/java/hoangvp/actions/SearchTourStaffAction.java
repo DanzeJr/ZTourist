@@ -17,16 +17,16 @@ import org.apache.logging.log4j.Logger;
  *
  * @author Danze
  */
-public class SearchTourAction extends ActionSupport {
+public class SearchTourStaffAction extends ActionSupport {
 
-    private static Logger logger = LogManager.getLogger(SearchTourAction.class.getName());
+    private static Logger logger = LogManager.getLogger(SearchTourStaffAction.class.getName());
 
     private String destSearch, dateSearch;
     private Integer skipPage, page;
     private int durationSearch, priceSearch, priceMin, priceMax,  totalPages;
     private List<TourDTO> listTour;
 
-    public SearchTourAction() {
+    public SearchTourStaffAction() {
     }
 
     @Override

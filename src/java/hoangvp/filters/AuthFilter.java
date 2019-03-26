@@ -57,6 +57,8 @@ public class AuthFilter implements Filter {
         guest.add("signUp_register");
         guest.add("signUp_register.action");
         guest.add("loginStaff.jsp");
+        guest.add("signInStaff");
+        guest.add("signInStaff.action");
 
         //CUSTOMER
         customer = new ArrayList<>();
@@ -84,10 +86,16 @@ public class AuthFilter implements Filter {
         //GUIDE
         guide = new ArrayList<>();
         guide.add("accessdenied.jsp");
+        guide.add("homeStaff.jsp");
+        guide.add("signOutStaff");
+        guide.add("signOutStaff.action");
         
         //ADMIN
         admin = new ArrayList<>();
         admin.add("accessdenied.jsp");
+        admin.add("homeStaff.jsp");
+        admin.add("signOutStaff");
+        admin.add("signOutStaff.action");
 
     }
 

@@ -25,7 +25,7 @@
     </head>
     <body class="tg-home tg-homevthree tg-login" style="background-image: url(images/Citybynightbr.jpg); background-repeat: no-repeat; background-size: auto">
         <div class="tg-navigationarea tg-headerfixed" style="background-color: transparent">
-            <strong class="tg-logo"><a href="index.html"><img src="images/dbzlogo.png" alt="company logo here"></a></strong>
+            <strong class="tg-logo"><a href="''"><img src="images/dbzlogo.png" alt="Z Tourist logo"></a></strong>
         </div>
         <!--************************************
                         Main Start

@@ -95,7 +95,7 @@
             <header id="tg-header" class="tg-header tg-headervtwo tg-headerfixed tg-haslayout">
                 <div class="container-fluid">
                     <div class="row">
-                        <strong class="tg-logo"><a href="index.html"><img src="images/dbzlogo.png" alt="company logo here"></a></strong>
+                        <strong class="tg-logo"><a href="''"><img src="images/dbzlogo.png" alt="Z Tourist logo"></a></strong>
                         <nav class="tg-infonav" style="padding: 0;">
                             <ul>
                                 <li><a style="line-height: 40px"  id="tg-btnsignin" href="#tg-loginsingup">sign in</a></li>
@@ -276,8 +276,6 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <s:hidden name="page" value="1" />
-                                            <s:hidden name="skipPage" value="0" />
                                             <button class="tg-btn" type="submit"><span>find tours</span></button>
                                         </div>
                                     </fieldset>

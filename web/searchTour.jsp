@@ -73,17 +73,9 @@
                             <li><a href="aboutus.html">About Us</a></li>
                             <li><a href="contactus.html">Contact us</a></li>
                             <li><a href="billingdetail.html">Billing Detail</a></li>
-                            <li><a href="404error.html">404 Error</a></li>
-                            <li><a href="comingsoon.html">Coming Soon</a></li>
-                            <li><a href="cart.html">cart</a></li>
-                            <li>
-                                <a href="javascript:void(0);">Tours</a>
-                                <ul>
-                                    <li><a href="tourcatagory.html">Tour Catagory</a></li>
-                                    <li><a href="tourbookingdetail.html">Tour Detail</a></li>
-                                    <li><a href="tourpaymentdetail.html">Tour Payment</a></li>
-                                </ul>
-                            </li>
+                            <s:if test="%{#session.ROLE == null}">
+                                <li><a href="loginStaff.jsp">For Staff Only</a></li>
+                            </s:if>
                         </ul>
                     </li>
                 </ul>
@@ -217,17 +209,9 @@
                                                     <li><a href="aboutus.html">About Us</a></li>
                                                     <li><a href="contactus.html">Contact us</a></li>
                                                     <li><a href="billingdetail.html">Billing Detail</a></li>
-                                                    <li><a href="404error.html">404 Error</a></li>
-                                                    <li><a href="comingsoon.html">Coming Soon</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li class="menu-item-has-children">
-                                                        <a href="javascript:void(0);">Tours</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="tourcatagory.html">Tour Catagory</a></li>
-                                                            <li><a href="tourbookingdetail.html">Tour Detail</a></li>
-                                                            <li><a href="tourpaymentdetail.html">Tour Payment</a></li>
-                                                        </ul>
-                                                    </li>
+                                                    <s:if test="%{#session.ROLE == null}">
+                                                        <li><a href="loginStaff.jsp">For Staff Only</a></li>
+                                                    </s:if>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -307,8 +291,6 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <s:hidden name="page" value="1" />
-                                            <s:hidden name="skipPage" value="0" />
                                             <button class="tg-btn" type="submit"><span>find tours</span></button>
                                         </div>
                                     </fieldset>
@@ -378,7 +360,7 @@
                                                 <s:if test="%{totalPages >= 3}"> <%-- if there is 3 or more than 3 pages --%>
                                                     <s:url action="searchTour" var="nextPage">
                                                         <s:param name="page" value="%{page + 1}" />
-                                                        <s:param name="skipPage" value="%{skipPage + 1}"/>
+                                                        <s:param name="skipPage" value="%{skipPage + 5}"/>
                                                         <s:param name="destSearch" value="%{destSearch}"/>
                                                         <s:param name="dateSearch" value="%{dateSearch}"/>
                                                         <s:param name="durationSearch" value="%{durationSearch}"/>
@@ -386,7 +368,7 @@
                                                     </s:url>
                                                     <s:url action="searchTour" var="prePage">
                                                         <s:param name="page" value="%{page - 1}" />
-                                                        <s:param name="skipPage" value="%{skipPage - 1}"/>
+                                                        <s:param name="skipPage" value="%{skipPage - 5}"/>
                                                         <s:param name="destSearch" value="%{destSearch}"/>
                                                         <s:param name="dateSearch" value="%{dateSearch}"/>
                                                         <s:param name="durationSearch" value="%{durationSearch}"/>
@@ -397,7 +379,7 @@
                                                         <li><s:a href="%{nextPage}"><s:property value="%{page + 1}"/></s:a></li>
                                                         <s:url action="searchTour" var="toPage">
                                                             <s:param name="page" value="%{page + 2}" />
-                                                            <s:param name="skipPage" value="%{skipPage + 2}"/>
+                                                            <s:param name="skipPage" value="%{skipPage + 10}"/>
                                                             <s:param name="destSearch" value="%{destSearch}"/>
                                                             <s:param name="dateSearch" value="%{dateSearch}"/>
                                                             <s:param name="durationSearch" value="%{durationSearch}"/>
@@ -409,7 +391,7 @@
                                                     <s:elseif test="%{page == totalPages}"> <%-- if last page is active --%>
                                                         <s:url action="searchTour" var="toPage">
                                                             <s:param name="page" value="%{page - 2}" />
-                                                            <s:param name="skipPage" value="%{skipPage - 2}"/>
+                                                            <s:param name="skipPage" value="%{skipPage - 10}"/>
                                                             <s:param name="destSearch" value="%{destSearch}"/>
                                                             <s:param name="dateSearch" value="%{dateSearch}"/>
                                                             <s:param name="durationSearch" value="%{durationSearch}"/>
@@ -434,7 +416,7 @@
                                                 <s:elseif test="%{totalPages == 2}"> <%-- else if only two pages show --%>
                                                     <s:url action="searchTour" var="nextPage">
                                                         <s:param name="page" value="%{page + 1}" />
-                                                        <s:param name="skipPage" value="%{skipPage + 1}"/>
+                                                        <s:param name="skipPage" value="%{skipPage + 5}"/>
                                                         <s:param name="destSearch" value="%{destSearch}"/>
                                                         <s:param name="dateSearch" value="%{dateSearch}"/>
                                                         <s:param name="durationSearch" value="%{durationSearch}"/>
@@ -442,7 +424,7 @@
                                                     </s:url>
                                                     <s:url action="searchTour" var="prePage">
                                                         <s:param name="page" value="%{page - 1}" />
-                                                        <s:param name="skipPage" value="%{skipPage - 1}"/>
+                                                        <s:param name="skipPage" value="%{skipPage - 5}"/>
                                                         <s:param name="destSearch" value="%{destSearch}"/>
                                                         <s:param name="dateSearch" value="%{dateSearch}"/>
                                                         <s:param name="durationSearch" value="%{durationSearch}"/>

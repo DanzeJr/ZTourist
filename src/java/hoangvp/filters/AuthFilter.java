@@ -111,6 +111,7 @@ public class AuthFilter implements Filter {
         admin.add("destinationStaff.jsp");
         admin.add("viewAllDestinationsStaff");
         admin.add("viewAllDestinationsStaff.action");
+        admin.add("addTour.jsp");
 
     }
 

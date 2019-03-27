@@ -22,10 +22,11 @@
                 list-style: none;
             }
         </style>
-        <title>Z Tourist Staff - New Destination</title>
+        <title>Z Tourist Staff - New Tour</title>
     </head>
     <body class="tg-home tg-homevthree tg-login">
         <s:action name="init"/>
+        <s:action name="initStaff"/>
         <!--************************************
                                 Loader Start
         *************************************-->
@@ -143,18 +144,18 @@
                                 <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
                                     <ul>
                                         <li class="menu-item-has-children"><a href="homeStaff.jsp">Home</a></li>
-                                        <li class="menu-item-has-children current-menu-item"><a href="viewAllDestinationsStaff">Destinations</a>
+                                        <li class="menu-item-has-children"><a href="viewAllDestinationsStaff">Destinations</a>
                                             <ul class="sub-menu">
                                                 <s:if test="%{#session.ROLE == 'admin'}">
-                                                <li class="current-menu-item"><a href="addDestination.jsp">Add new destination</a></li>                    
-                                                </s:if>
+                                                    <li><a href="addDestination.jsp">Add new destination</a></li>                    
+                                                    </s:if>
                                                 <li><a href="link">Search destination</a></li>
                                             </ul>
                                         </li>
-                                        <li class="menu-item-has-children"><a href="viewAllTour">Tours</a>
+                                        <li class="menu-item-has-children current-menu-item"><a href="viewAllTour">Tours</a>
                                             <s:if test="%{#session.ROLE == 'admin'}">
                                                 <ul class="sub-menu">
-                                                    <li><a href="addTour.jsp">Add new tour</a></li>
+                                                    <li class="current-menu-item"><a href="addTour.jsp">Add new tour</a></li>
                                                 </ul>
                                             </s:if>
                                         </li>
@@ -259,29 +260,75 @@
                 <s:if test="hasActionErrors()">
                     <h4 style="text-align: center; color: red; padding-top: 4%;"><s:actionerror/></h4>
                 </s:if>
-                <s:form cssClass="tg-formtheme tg-formdashboard checkValidate" action="addDestination" enctype="multipart/form-data">
+                <s:form cssClass="tg-formtheme tg-formdashboard checkValidate" action="addTour" enctype="multipart/form-data">
                     <div class="tg-imgholder" style="width: 100%; height: 10%">
                         <center>
                         <figure><img id="imgTitle" style="height: 100%; width: 80%" src="<s:if test="%{titleImage != null}"><s:property value="%{titleImage}"/></s:if><s:else>images/places/default.jpg</s:else>" alt="Destination Image"></figure>
                         <s:file id="titleImg" cssStyle="display: none" name="photo"/>
-                        <a class="tg-btn" href="javascript:void(0);" onclick="$('#titleImg').click();">Choose Destination Image</a>
+                        <a class="tg-btn" href="javascript:void(0);" onclick="$('#titleImg').click();">Choose Tour Image</a>
                         </center>
                     </div>
                     <div style="padding: 10%">                        
                         <div class="form-group" id="idV">
-                            <label>Destination ID <sup>*</sup></label>
+                            <label>Tour ID <sup>*</sup></label>
                             <s:textfield cssClass="form-control" name="id" id="id" value="%{id}" required="true"/>
                             <s:fielderror fieldName="id"/>
                         </div>
                         <div class="form-group">
-                            <label>Destination Name <sup>*</sup></label>
+                            <label>Tour Name <sup>*</sup></label>
                             <s:textfield cssClass="form-control" name="name" value="%{name}" required="true"/>
                         </div>
                         <div class="form-group">
-                            <label>Country <sup>*</sup></label>
+                            <label>From Date <sup>*</sup></label>
+                            <s:textfield id="fromDatePicker" cssClass="form-control" name="fromDate" value="%{fromDate}" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label>To Date <sup>*</sup></label>
+                            <s:textfield id="toDatePicker" cssClass="form-control" name="toDate" value="%{toDate}" required="true"/>
+                        </div>
+                        <div class="form-group" style="width: 50%">
+                            <label>Departure <sup>*</sup></label>
                             <div>
-                                <s:select cssClass="form-control selectpicker countrypicker" data-flag="true" data-default="Viet Nam" data-live-search="true" list="#@java.util.LinkedHashMap@{}" name="country"/>
+                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Departure" data-live-search="true" list="%{#request.Dest}" name="departure" required="true"/>
                             </div>
+                        </div>
+                        <div class="form-group" style="width: 50%">
+                            <label>Destination 1 <sup>*</sup></label>
+                            <div>
+                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Destination 1" data-live-search="true" list="%{#request.Dest}" name="destination1" required="true"/>
+                            </div>
+                        </div>
+                        <div class="form-group" style="width: 50%">
+                            <label>Destination 2 </label>
+                            <div>
+                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Destination 2" data-live-search="true" list="%{#request.Dest}" name="destination2"/>
+                            </div>
+                        </div>
+                        <div class="form-group" style="width: 50%">
+                            <label>Destination 3 </label>
+                            <div>
+                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Destination 3" data-live-search="true" list="%{#request.Dest}" name="destination3"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Adult Fare <sup>*</sup></label>
+                            <s:textfield cssClass="form-control" name="fareAdult" value="%{fareAdult}" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Kid Fare <sup>*</sup></label>
+                            <s:textfield cssClass="form-control" name="fareKid" value="%{fareKid}" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Transport <sup>*</sup></label>
+                            <s:textfield cssClass="form-control" name="transport" value="%{transport}" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Minimum Guest <sup>*</sup></label>
+                            <s:textfield id="minGuest" cssClass="form-control" name="minGuest" value="%{minGuest}" required="true"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Maximum Guest <sup>*</sup></label>
+                            <s:textfield id="maxGuest" cssClass="form-control" name="maxGuest" value="%{maxGuest}" required="true"/>
                         </div>
                         <div class="form-group">
                             <label>Description </label>
@@ -411,6 +458,20 @@
             });
             $("#datetimepicker2").attr("placeholder", "From Date");
             
+            $('#fromDatePicker').datetimepicker({
+                format: 'Y-MM-DD HH:mm:ss'
+            });
+            $('#toDatePicker').datetimepicker({
+                useCurrent: false,
+                format: 'Y-MM-DD HH:mm:ss'
+            });
+            $("#fromDatePicker").on("dp.change", function (e) {
+                $('#toDatePicker').data("DateTimePicker").minDate(e.date);
+            });
+            $("#toDatePicker").on("dp.change", function (e) {
+                $('#fromDatePicker').data("DateTimePicker").maxDate(e.date);
+            });
+            
             /* -------------------------------------
              PRETTY PHOTO GALLERY
              -------------------------------------- */
@@ -456,6 +517,10 @@
                         $('#idV > .errorMessage').hide();
                     }
                 });
+                
+                $.validator.addMethod("price", function (value, element) {
+                    return this.optional(element) || /^(\d{1,18})(\.\d{1,2})*?$/.test(value);;
+                });
                                 
                 $(document).ready(function () {
                     $(".checkValidate").each(function () {
@@ -470,21 +535,77 @@
                                     required: true,
                                     maxlength: 100
                                 },
+                                fromDate: {
+                                    required: true
+                                },
+                                toDate: {
+                                    required: true
+                                },
                                 des: {
                                     maxlength: 200
+                                },
+                                fareAdult: {
+                                    required: true,
+                                    price: true
+                                },
+                                fareKid: {
+                                    required: true,
+                                    price: true
+                                },
+                                transport: {
+                                    required: true,
+                                    maxlength: 50
+                                },
+                                minGuest: {
+                                    required: true,
+                                    number: true,
+                                    range: [0, 100]
+                                },
+                                maxGuest: {
+                                    required: true,
+                                    number: true,
+                                    range: [0, 100]
                                 }
                             },
                             messages: {
                                 id: {
-                                    required: "Please enter destination ID",
-                                    maxlength: "Destination ID must not be greater than 30 characters long"
+                                    required: "Please enter tour ID",
+                                    maxlength: "Tour ID must not be greater than 30 characters long"
                                 },
                                 name: {
-                                    required: "Please enter destination name",
-                                    maxlength: "First name must not be greater than 50 characters long"
+                                    required: "Please enter tour name",
+                                    maxlength: "Tour name must not be greater than 50 characters long"
+                                },
+                                fromDate: {
+                                    required: "Please choose when tour start"
+                                },
+                                toDate: {
+                                    required: "Please choose when tour end"
                                 },
                                 des: {
                                     maxlength: "Description must not be greater than 200 characters long"
+                                },
+                                fareAdult: {
+                                    required: "Please enter adult fare",
+                                    price: "Adult fare must be a float number with maximum 2 decimal places"
+                                },
+                                fareKid: {
+                                    required: "Please enter kid fare",
+                                    price: "Kid fare must be a float number with maximum 2 decimal places"
+                                },
+                                transport: {
+                                    required: "Please enter the transport of this tour",
+                                    maxlength: "Transport must not be greater than 50 characters long"
+                                },
+                                minGuest: {
+                                    required: "Please enter minimum guest of this tour",
+                                    number: "Minimum guest must be a number",
+                                    range: "Minimum guest must be in range from 0 to 100"
+                                },
+                                maxGuest: {
+                                    required: "Please enter maximum guest of this tour",
+                                    number: "Maximum guest must be a number",
+                                    range: "Maximmum guest must be in range from 0 to 100"
                                 }
                             }
                         });

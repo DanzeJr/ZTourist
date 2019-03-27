@@ -21,6 +21,10 @@
         <action name="init" class="hoangvp.actions.InitNavAction">
             <result name="success">index.jsp</result>
         </action>
+        <action name="initStaff" class="hoangvp.actions.InitStaffAction">
+            <result name="success">homeStaff.jsp</result>
+        </action>
+        
         <action name="searchTour" class="hoangvp.actions.SearchTourAction">
             <result name="success">searchTour.jsp</result>
         </action>

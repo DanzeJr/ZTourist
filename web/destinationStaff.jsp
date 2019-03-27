@@ -15,7 +15,7 @@
                 color: black;
             }
         </style>
-        <title>Z Tourist Staff - Home</title>
+        <title>Z Tourist Staff - Destinations</title>
     </head>
     <body class="tg-home tg-homevthree tg-login">
         <s:action name="init"/>

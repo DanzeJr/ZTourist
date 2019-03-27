@@ -90,17 +90,6 @@
                         <li><a href="aboutus.html">About Us</a></li>
                         <li><a href="contactus.html">Contact us</a></li>
                         <li><a href="billingdetail.html">Billing Detail</a></li>
-                        <li><a href="404error.html">404 Error</a></li>
-                        <li><a href="comingsoon.html">Coming Soon</a></li>
-                        <li><a href="cart.html">cart</a></li>
-                        <li>
-                            <a href="javascript:void(0);">Tours</a>
-                            <ul>
-                                <li><a href="tourcatagory.html">Tour Catagory</a></li>
-                                <li><a href="tourbookingdetail.html">Tour Detail</a></li>
-                                <li><a href="tourpaymentdetail.html">Tour Payment</a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </li>
             </ul>
@@ -229,17 +218,6 @@
                                                     <li><a href="aboutus.html">About Us</a></li>
                                                     <li><a href="contactus.html">Contact us</a></li>
                                                     <li><a href="billingdetail.html">Billing Detail</a></li>
-                                                    <li><a href="404error.html">404 Error</a></li>
-                                                    <li><a href="comingsoon.html">Coming Soon</a></li>
-                                                    <li><a href="cart.html">cart</a></li>
-                                                    <li class="menu-item-has-children">
-                                                        <a href="javascript:void(0);">Tours</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="tourcatagory.html">Tour Catagory</a></li>
-                                                            <li><a href="tourbookingdetail.html">Tour Detail</a></li>
-                                                            <li><a href="tourpaymentdetail.html">Tour Payment</a></li>
-                                                        </ul>
-                                                    </li>
                                                 </ul>
                                             </li>
                                         </ul>

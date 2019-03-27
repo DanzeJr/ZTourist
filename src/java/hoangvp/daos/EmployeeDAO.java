@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 /**
  *
@@ -31,6 +32,29 @@ public class EmployeeDAO implements Serializable{
             pre.close();
         if (conn != null)
             conn.close();
+    }
+    
+    public HashMap<String, String> getGuideIdName() throws Exception {
+        HashMap<String, String> result;
+        String username, name, fname, lname;
+        
+        try {
+            String sql = "SELECT Username, FirstName, LastName FROM tblEmployee WHERE Role = 'guide'";
+            conn = MyConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+            rs = pre.executeQuery();
+            result = new HashMap<>();
+            while (rs.next()) {
+                username = rs.getString("Username");
+                fname = rs.getString("FirstName");
+                lname = rs.getString("LastName");
+                name = fname + " " + lname;
+                result.put(username, name);
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
     }
     
     public boolean isExistedUsername(String username) throws Exception {

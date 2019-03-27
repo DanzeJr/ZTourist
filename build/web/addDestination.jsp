@@ -14,7 +14,7 @@
             #datetimepicker1 table tr th{
                 color: black;
             }
-            .checkValidate label.error, .checkValidate sup {
+            .checkValidate label.error, .checkValidate sup, .checkValidate .errorMessage {
                 color: red !important;
                 font-size: 12px !important;
             }
@@ -146,8 +146,8 @@
                                         <li class="menu-item-has-children current-menu-item"><a href="viewAllDestinationsStaff">Destinations</a>
                                             <ul class="sub-menu">
                                                 <s:if test="%{#session.ROLE == 'admin'}">
-                                                    <li><a href="addDestination.jsp">Add new destination</a></li>                    
-                                                    </s:if>
+                                                <li class="current-menu-item"><a href="addDestination.jsp">Add new destination</a></li>                    
+                                                </s:if>
                                                 <li><a href="link">Search destination</a></li>
                                             </ul>
                                         </li>
@@ -274,7 +274,7 @@
                             <s:fielderror fieldName="id"/>
                         </div>
                         <div class="form-group">
-                            <label>Destination name <sup>*</sup></label>
+                            <label>Destination Name <sup>*</sup></label>
                             <s:textfield cssClass="form-control" name="name" value="%{name}" required="true"/>
                         </div>
                         <div class="form-group">

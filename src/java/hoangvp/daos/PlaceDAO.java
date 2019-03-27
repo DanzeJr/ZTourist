@@ -38,7 +38,7 @@ public class PlaceDAO implements Serializable{
         String id, name;
         
         try {
-            String sql = "SELECT ID, Name FROM tblPlace";
+            String sql = "SELECT ID, Name FROM tblPlace WHERE Status = 'Active'";
             conn = MyConnection.getConnection();
             pre = conn.prepareStatement(sql);
             rs = pre.executeQuery();

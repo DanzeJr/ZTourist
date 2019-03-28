@@ -17,11 +17,25 @@ public class TourDTO implements Serializable{
     private String id, name, desc, transport, status, titleImage, fromDate, toDate;
     private float fareAdult, fareKid, duration;
     private Timestamp fromDateTime, toDateTime;
-    private int minGuest, maxGuest, saleOff;
+    private int minGuest, maxGuest;
     private List<PlaceDTO> listPlace;
+    private List<EmployeeDTO> listGuide;
 
     public TourDTO() {
     }
+
+    public TourDTO(String name, String desc, String transport, String titleImage, float fareAdult, float fareKid, Timestamp fromDateTime, Timestamp toDateTime, int minGuest, int maxGuest) {
+        this.name = name;
+        this.desc = desc;
+        this.transport = transport;
+        this.titleImage = titleImage;
+        this.fareAdult = fareAdult;
+        this.fareKid = fareKid;
+        this.fromDateTime = fromDateTime;
+        this.toDateTime = toDateTime;
+        this.minGuest = minGuest;
+        this.maxGuest = maxGuest;
+    }       
     
     public TourDTO(String id, String name, String desc, String transport, String titleImage, float fareAdult, float duration, String fromDate, String toDate) {
         this.id = id;
@@ -153,15 +167,7 @@ public class TourDTO implements Serializable{
 
     public void setMaxGuest(int maxGuest) {
         this.maxGuest = maxGuest;
-    }
-
-    public int getSaleOff() {
-        return saleOff;
-    }
-
-    public void setSaleOff(int saleOff) {
-        this.saleOff = saleOff;
-    }    
+    }   
 
     public List<PlaceDTO> getListPlace() {
         return listPlace;
@@ -169,6 +175,14 @@ public class TourDTO implements Serializable{
 
     public void setListPlace(List<PlaceDTO> listPlace) {
         this.listPlace = listPlace;
+    }
+
+    public List<EmployeeDTO> getListGuide() {
+        return listGuide;
+    }
+
+    public void setListGuide(List<EmployeeDTO> listGuide) {
+        this.listGuide = listGuide;
     }
     
 }

@@ -51,7 +51,7 @@
                         <li><a href="link">Search destination</a></li>
                     </ul>
                 </li>
-                <li><a href="viewAllTour">Tours</a>
+                <li><a href="viewAllToursStaff">Tours</a>
                     <s:if test="%{#session.ROLE == 'admin'}">
                     <ul>
                         <li><a href="addTour.jsp">Add new tour</a></li>
@@ -69,7 +69,11 @@
                 </li>
                 </s:if>                
                 <s:if test="%{#session.ROLE == 'admin'}">
-                <li><a href="checkBooking">Check Booking</a></li>
+                <li><a href="viewAllCustomers">Customer</a>      
+                    <ul>                      
+                        <li><a href="viewWaitingBooking">Check Booking</a></li>   
+                    </ul>             
+                </li>
                 </s:if>
                 <s:if test="%{#session.ROLE == 'admin'}">
                 <li><a href="viewAllSaleCodes">Promotion Codes</a></li>
@@ -151,7 +155,7 @@
                                                 <li><a href="link">Search destination</a></li>
                                             </ul>
                                         </li>
-                                        <li class="menu-item-has-children"><a href="viewAllTour">Tours</a>
+                                        <li class="menu-item-has-children"><a href="viewAllToursStaff">Tours</a>
                                             <s:if test="%{#session.ROLE == 'admin'}">
                                                 <ul class="sub-menu">
                                                     <li><a href="addTour.jsp">Add new tour</a></li>
@@ -171,7 +175,11 @@
                                             </li>
                                         </s:if>                
                                         <s:if test="%{#session.ROLE == 'admin'}">
-                                            <li><a href="checkBooking">Check Booking</a></li>
+                                            <li><a href="viewAllCustomers">Customer</a>    
+                                                <ul>                
+                                                    <li><a href="viewWaitingBooking">Check Booking</a></li>       
+                                                </ul>               
+                                            </li>
                                         </s:if>
                                         <s:if test="%{#session.ROLE == 'admin'}">
                                             <li><a href="viewAllSaleCodes">Promotion Codes</a></li>
@@ -259,7 +267,7 @@
                 <s:if test="hasActionErrors()">
                     <h4 style="text-align: center; color: red; padding-top: 4%;"><s:actionerror/></h4>
                 </s:if>
-                <s:form cssClass="tg-formtheme tg-formdashboard checkValidate" action="addDestination" enctype="multipart/form-data">
+                <s:form cssClass="tg-formtheme tg-formdashboard checkValidate" action="addDestination" method="POST" enctype="multipart/form-data">
                     <div class="tg-imgholder" style="width: 100%; height: 10%">
                         <center>
                         <figure><img id="imgTitle" style="height: 100%; width: 80%" src="<s:if test="%{titleImage != null}"><s:property value="%{titleImage}"/></s:if><s:else>images/places/default.jpg</s:else>" alt="Destination Image"></figure>

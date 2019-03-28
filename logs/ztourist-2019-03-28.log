@@ -1,0 +1,7 @@
+2019-03-28 14:24:07 ERROR AddTourAction:129 - Invalid column name 'PlaceID'.
+2019-03-28 14:24:08 ERROR ViewAllToursStaffAction:47 - Invalid column name 'FromDate'.
+2019-03-28 14:26:03 ERROR AddTourAction:129 - Invalid column name 'PlaceID'.
+2019-03-28 14:26:03 ERROR ViewAllToursStaffAction:47 - Invalid column name 'FromDate'.
+2019-03-28 14:29:51 ERROR AddTourAction:129 - Invalid column name 'PlaceID'.
+2019-03-28 14:29:51 ERROR ViewAllToursStaffAction:47 - Invalid column name 'FromDate'.
+2019-03-28 14:35:01 ERROR ViewAllToursStaffAction:47 - Invalid column name 'FromDate'.

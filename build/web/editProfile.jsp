@@ -262,7 +262,7 @@
                 <div class="container">
                     <div class="row">
                         <div id="tg-twocolumns" class="tg-twocolumns">
-                            <s:form cssClass="tg-formtheme tg-formdashboard checkValidate" action="updateProfile" enctype="multipart/form-data">
+                            <s:form cssClass="tg-formtheme tg-formdashboard checkValidate" action="updateProfile" method="POST" enctype="multipart/form-data">
                                 <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                                     <aside id="tg-sidebar" class="tg-sidebar">
                                         <div class="tg-widget tg-widgetdashboard">
@@ -296,37 +296,45 @@
                                                     </div>
                                                     <div class="tg-content">
                                                         <fieldset>
+                                                            <div class="form-group" style="width: 100%">
                                                             <div class="form-group">
                                                                 <label>First name <sup>*</sup></label>
                                                                 <s:textfield cssClass="form-control" name="firstName" value="%{firstName}" required="true"/>
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-group" style="float: right">
                                                                 <label>Last name <sup>*</sup></label>
                                                                 <s:textfield cssClass="form-control" name="lastName" value="%{lastName}" required="true"/>
                                                             </div>
+                                                            </div>
+                                                            <div class="form-group" style="width: 100%">
                                                             <div class="form-group">
                                                                 <label>Gender <sup>*</sup></label>
                                                                 <s:select cssClass="form-control" name="gender" list="#@java.util.LinkedHashMap@{'Male':'Male', 'Female':'Female', 'Others':'Others'}"/>
                                                             </div>
-                                                            <div class="form-group" id="yob">
+                                                            <div class="form-group" id="yob" style="float: right">
                                                                 <label>Birth date <sup>*</sup></label>
                                                                 <s:textfield id="datetimepicker3" cssClass="form-control" name="birthDate" value="%{birthDate}" required="true"/>
                                                             </div>
+                                                            </div>
+                                                            <div class="form-group" style="width: 100%">
                                                             <div class="form-group">
                                                                 <label>Email Address <sup>*</sup></label>
                                                                 <s:textfield cssClass="form-control" type="email" name="email" value="%{email}" required="true"/>
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-group" style="float: right">
                                                                 <label>Phone Number <sup>*</sup></label>
                                                                 <s:textfield type="tel" name="phone" cssClass="form-control" value="%{phone}" required="true"/>
-                                                            </div>                                                           
+                                                            </div>
+                                                            </div>
+                                                            <div class="form-group" style="width: 100%">
                                                             <div class="form-group">
                                                                 <label>Contact Address <sup>*</sup></label>
                                                                 <s:textfield name="address" cssClass="form-control" value="%{address}" required="true"/>
                                                             </div>
-                                                            <div class="form-group">
+                                                            <div class="form-group" style="float: right">
                                                                 <label>Job </label>
                                                                 <s:textfield cssClass="form-control" name="job" value="%{job}"/>
+                                                            </div>
                                                             </div>
                                                             <button class="tg-btn" type="submit"><span>update profile</span></button>
                                                         </fieldset>

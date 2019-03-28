@@ -44,7 +44,7 @@
                         <li><a href="link">Search destination</a></li>
                     </ul>
                 </li>
-                <li><a href="viewAllTour">Tours</a>
+                <li><a href="viewAllToursStaff">Tours</a>
                     <s:if test="%{#session.ROLE == 'admin'}">
                     <ul>
                         <li><a href="addTour.jsp">Add new tour</a></li>
@@ -62,7 +62,11 @@
                 </li>
                 </s:if>                
                 <s:if test="%{#session.ROLE == 'admin'}">
-                <li><a href="checkBooking">Check Booking</a></li>
+                <li><a href="viewAllCustomers">Customer</a>         
+                    <ul>                      
+                        <li><a href="viewWaitingBooking">Check Booking</a></li>      
+                    </ul>        
+                </li>
                 </s:if>
                 <s:if test="%{#session.ROLE == 'admin'}">
                 <li><a href="viewAllSaleCodes">Promotion Codes</a></li>
@@ -144,7 +148,7 @@
                                                 <li><a href="link">Search destination</a></li>
                                             </ul>
                                         </li>
-                                        <li class="menu-item-has-children"><a href="viewAllTour">Tours</a>
+                                        <li class="menu-item-has-children"><a href="viewAllToursStaff">Tours</a>
                                             <s:if test="%{#session.ROLE == 'admin'}">
                                                 <ul class="sub-menu">
                                                     <li><a href="addTour.jsp">Add new tour</a></li>
@@ -164,7 +168,11 @@
                                             </li>
                                         </s:if>                
                                         <s:if test="%{#session.ROLE == 'admin'}">
-                                            <li><a href="checkBooking">Check Booking</a></li>
+                                            <li><a href="viewAllCustomers">Customer</a>   
+                                                <ul>                    
+                                                    <li><a href="viewWaitingBooking">Check Booking</a></li>         
+                                                </ul>             
+                                            </li>
                                         </s:if>
                                         <s:if test="%{#session.ROLE == 'admin'}">
                                             <li><a href="viewAllSaleCodes">Promotion Codes</a></li>

@@ -7,6 +7,10 @@ package hoangvp.actions;
 
 import com.opensymphony.xwork2.ActionSupport;
 import hoangvp.daos.EmployeeDAO;
+import hoangvp.daos.PlaceDAO;
+import hoangvp.daos.TourDAO;
+import hoangvp.dtos.TourDTO;
+import java.util.List;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,7 +31,25 @@ public class InitStaffAction extends ActionSupport implements RequestAware{
     
     @Override
     public String execute() {
-        try {            
+        try {
+            TourDAO td = new TourDAO();
+            List<TourDTO> pTour = td.getPopularTours();
+            if (!pTour.isEmpty()) {
+                for (TourDTO s : pTour) {
+                    s.setListPlace(td.findPlacesByTourID(s.getId()));
+                }
+                request.put("Ptour", pTour);
+            } else {
+                pTour = td.getTopNearestTours();
+                for (TourDTO s : pTour) {
+                    s.setListPlace(td.findPlacesByTourID(s.getId()));
+                }
+                request.put("Ptour", pTour);
+            }
+            
+            PlaceDAO pd = new PlaceDAO();
+            Map<String, String> dest = pd.getPlaceIdName();
+            request.put("Dest", dest);
             EmployeeDAO dao = new EmployeeDAO();
             Map<String, String> guide = dao.getGuideIdName();
             request.put("Guide", guide);

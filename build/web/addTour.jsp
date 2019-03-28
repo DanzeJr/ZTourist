@@ -18,14 +18,16 @@
                 color: red !important;
                 font-size: 12px !important;
             }
-            .countrypicker li{
+            .checkValidate .form-group li {
                 list-style: none;
+            }
+            .checkValidate .form-group {
+                clear: none;
             }
         </style>
         <title>Z Tourist Staff - New Tour</title>
     </head>
     <body class="tg-home tg-homevthree tg-login">
-        <s:action name="init"/>
         <s:action name="initStaff"/>
         <!--************************************
                                 Loader Start
@@ -52,7 +54,7 @@
                         <li><a href="link">Search destination</a></li>
                     </ul>
                 </li>
-                <li><a href="viewAllTour">Tours</a>
+                <li><a href="viewAllToursStaff">Tours</a>
                     <s:if test="%{#session.ROLE == 'admin'}">
                     <ul>
                         <li><a href="addTour.jsp">Add new tour</a></li>
@@ -70,7 +72,11 @@
                 </li>
                 </s:if>                
                 <s:if test="%{#session.ROLE == 'admin'}">
-                <li><a href="checkBooking">Check Booking</a></li>
+                <li><a href="viewAllCustomers">Customer</a>
+                    <ul>
+                        <li><a href="viewWaitingBooking">Check Booking</a></li>
+                    </ul>
+                </li>
                 </s:if>
                 <s:if test="%{#session.ROLE == 'admin'}">
                 <li><a href="viewAllSaleCodes">Promotion Codes</a></li>
@@ -152,7 +158,7 @@
                                                 <li><a href="link">Search destination</a></li>
                                             </ul>
                                         </li>
-                                        <li class="menu-item-has-children current-menu-item"><a href="viewAllTour">Tours</a>
+                                        <li class="menu-item-has-children current-menu-item"><a href="viewAllToursStaff">Tours</a>
                                             <s:if test="%{#session.ROLE == 'admin'}">
                                                 <ul class="sub-menu">
                                                     <li class="current-menu-item"><a href="addTour.jsp">Add new tour</a></li>
@@ -172,7 +178,11 @@
                                             </li>
                                         </s:if>                
                                         <s:if test="%{#session.ROLE == 'admin'}">
-                                            <li><a href="checkBooking">Check Booking</a></li>
+                                            <li><a href="viewAllCustomers">Customer</a>
+                                                <ul>                        
+                                                    <li><a href="viewWaitingBooking">Check Booking</a></li>             
+                                                </ul>           
+                                            </li>
                                         </s:if>
                                         <s:if test="%{#session.ROLE == 'admin'}">
                                             <li><a href="viewAllSaleCodes">Promotion Codes</a></li>
@@ -260,10 +270,10 @@
                 <s:if test="hasActionErrors()">
                     <h4 style="text-align: center; color: red; padding-top: 4%;"><s:actionerror/></h4>
                 </s:if>
-                <s:form cssClass="tg-formtheme tg-formdashboard checkValidate" action="addTour" enctype="multipart/form-data">
+                <s:form cssClass="tg-formtheme tg-formdashboard checkValidate" action="addTour" method="POST" enctype="multipart/form-data">
                     <div class="tg-imgholder" style="width: 100%; height: 10%">
                         <center>
-                        <figure><img id="imgTitle" style="height: 100%; width: 80%" src="<s:if test="%{titleImage != null}"><s:property value="%{titleImage}"/></s:if><s:else>images/places/default.jpg</s:else>" alt="Destination Image"></figure>
+                        <figure><img id="imgTitle" style="height: 100%; width: 80%" src="<s:if test="%{titleImage != null}"><s:property value="%{titleImage}"/></s:if><s:else>images/tours/default.jpg</s:else>" alt="Tour Image"></figure>
                         <s:file id="titleImg" cssStyle="display: none" name="photo"/>
                         <a class="tg-btn" href="javascript:void(0);" onclick="$('#titleImg').click();">Choose Tour Image</a>
                         </center>
@@ -279,64 +289,100 @@
                             <s:textfield cssClass="form-control" name="name" value="%{name}" required="true"/>
                         </div>
                         <div class="form-group">
+                        <div class="form-group" style="width: 48%">
                             <label>From Date <sup>*</sup></label>
                             <s:textfield id="fromDatePicker" cssClass="form-control" name="fromDate" value="%{fromDate}" required="true"/>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="width: 48%; float: right">
                             <label>To Date <sup>*</sup></label>
                             <s:textfield id="toDatePicker" cssClass="form-control" name="toDate" value="%{toDate}" required="true"/>
                         </div>
-                        <div class="form-group" style="width: 50%">
-                            <label>Departure <sup>*</sup></label>
-                            <div>
-                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Departure" data-live-search="true" list="%{#request.Dest}" name="departure" required="true"/>
-                            </div>
-                        </div>
-                        <div class="form-group" style="width: 50%">
-                            <label>Destination 1 <sup>*</sup></label>
-                            <div>
-                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Destination 1" data-live-search="true" list="%{#request.Dest}" name="destination1" required="true"/>
-                            </div>
-                        </div>
-                        <div class="form-group" style="width: 50%">
-                            <label>Destination 2 </label>
-                            <div>
-                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Destination 2" data-live-search="true" list="%{#request.Dest}" name="destination2"/>
-                            </div>
-                        </div>
-                        <div class="form-group" style="width: 50%">
-                            <label>Destination 3 </label>
-                            <div>
-                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Destination 3" data-live-search="true" list="%{#request.Dest}" name="destination3"/>
-                            </div>
                         </div>
                         <div class="form-group">
+                        <div class="form-group" style="width: 48%">
                             <label>Adult Fare <sup>*</sup></label>
                             <s:textfield cssClass="form-control" name="fareAdult" value="%{fareAdult}" required="true"/>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" style="width: 48%; float: right">
                             <label>Kid Fare <sup>*</sup></label>
                             <s:textfield cssClass="form-control" name="fareKid" value="%{fareKid}" required="true"/>
+                        </div>
+                        </div>
+                        <div class="form-group">
+                        <div class="form-group" style="width: 48%">
+                            <label>Minimum Guest <sup>*</sup></label>
+                            <s:textfield id="minGuest" cssClass="form-control" name="minGuest" value="%{minGuest}" required="true"/>
+                        </div>
+                        <div class="form-group" style="width: 48%; float: right">
+                            <label>Maximum Guest <sup>*</sup></label>
+                            <s:textfield id="maxGuest" cssClass="form-control" name="maxGuest" value="%{maxGuest}" required="true"/>
+                        </div>
                         </div>
                         <div class="form-group">
                             <label>Transport <sup>*</sup></label>
                             <s:textfield cssClass="form-control" name="transport" value="%{transport}" required="true"/>
                         </div>
                         <div class="form-group">
-                            <label>Minimum Guest <sup>*</sup></label>
-                            <s:textfield id="minGuest" cssClass="form-control" name="minGuest" value="%{minGuest}" required="true"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Maximum Guest <sup>*</sup></label>
-                            <s:textfield id="maxGuest" cssClass="form-control" name="maxGuest" value="%{maxGuest}" required="true"/>
-                        </div>
-                        <div class="form-group">
                             <label>Description </label>
-                            <s:textarea cssClass="form-control" name="des"/>
+                            <s:textarea cssClass="form-control" name="des" value="%{des}"/>
                         </div>
-                        <center>
-                        <button class="tg-btn" type="submit"><span>Add Destination</span></button>
-                        </center>
+                        <div class="form-group">
+                            <h3 style="font-weight: bold">Destinations: </h3>
+                        </div>
+                        <div class="form-group" style="width: 48%">
+                            <label>Departure <sup>*</sup></label>
+                            <div>
+                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Departure" data-live-search="true" list="%{#request.Dest}" name="departure" required="true"/>
+                            </div>
+                        </div>
+                        <div class="form-group" style="width: 48%; float: right">
+                            <label>Destination 1 <sup>*</sup></label>
+                            <div>
+                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Destination 1" data-live-search="true" list="%{#request.Dest}" name="destination1" required="true"/>
+                            </div>
+                        </div>
+                        <div class="form-group" style="width: 48%">
+                            <label>Destination 2 </label>
+                            <div>
+                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Destination 2" data-live-search="true" list="%{#request.Dest}" name="destination2"/>
+                            </div>
+                        </div>
+                        <div class="form-group" style="width: 48%; float: right">
+                            <label>Destination 3 </label>
+                            <div>
+                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Destination 3" data-live-search="true" list="%{#request.Dest}" name="destination3"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h3 style="font-weight: bold">Guides: </h3>
+                        </div>    
+                        <div class="form-group" style="width: 48%">
+                            <label>Guide 1 <sup>*</sup></label>
+                            <div>
+                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Guide 1" data-live-search="true" list="%{#request.Guide}" name="guide1" required="true"/>
+                            </div>
+                        </div>
+                        <div class="form-group" style="width: 48%; float: right">
+                            <label>Guide 2 </label>
+                            <div>
+                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Guide 2" data-live-search="true" list="%{#request.Guide}" name="guide2"/>
+                            </div>
+                        </div>
+                        <div class="form-group" style="width: 48%">
+                            <label>Guide 3 </label>
+                            <div>
+                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Guide 3" data-live-search="true" list="%{#request.Guide}" name="guide3"/>
+                            </div>
+                        </div>
+                        <div class="form-group" style="width: 48%; float: right">
+                            <label>Guide 4 </label>
+                            <div>
+                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Guide 4" data-live-search="true" list="%{#request.Guide}" name="guide4"/>
+                            </div>
+                        </div>
+                    <center>
+                        <button class="tg-btn" type="submit"><span>Add Tour</span></button>
+                    </center>                       
                     </div>
                 </s:form>
             </main>
@@ -518,8 +564,17 @@
                     }
                 });
                 
-                $.validator.addMethod("price", function (value, element) {
+                $.validator.addMethod("price", function (value, element) { //validate price
                     return this.optional(element) || /^(\d{1,18})(\.\d{1,2})*?$/.test(value);;
+                });
+                $.validator.addMethod("selected", function (value, element) {
+                    return this.optional(element) || value !== '-1';;
+                });
+                $.validator.addMethod("ge", function (value, element, param) {
+                    return this.optional(element) || parseInt(value) >= parseInt($(param).val());
+                });
+                $.validator.addMethod("le", function (value, element, param) {
+                    return this.optional(element) || parseInt(value) <= parseInt($(param).val());
                 });
                                 
                 $(document).ready(function () {
@@ -559,12 +614,23 @@
                                 minGuest: {
                                     required: true,
                                     number: true,
-                                    range: [0, 100]
+                                    range: [0, 100],
+                                    le: "#maxGuest"
                                 },
                                 maxGuest: {
                                     required: true,
                                     number: true,
-                                    range: [0, 100]
+                                    range: [1, 100],
+                                    ge: "#minGuest"
+                                },
+                                departure: {
+                                    selected: true
+                                },
+                                destination1: {
+                                    selected: true
+                                },
+                                guide1: {
+                                    selected: true
                                 }
                             },
                             messages: {
@@ -600,12 +666,23 @@
                                 minGuest: {
                                     required: "Please enter minimum guest of this tour",
                                     number: "Minimum guest must be a number",
-                                    range: "Minimum guest must be in range from 0 to 100"
+                                    range: "Minimum guest must be in range from 0 to 100",
+                                    le: "Minimum guest must be lesser or equals to maximum guest"
                                 },
                                 maxGuest: {
                                     required: "Please enter maximum guest of this tour",
                                     number: "Maximum guest must be a number",
-                                    range: "Maximmum guest must be in range from 0 to 100"
+                                    range: "Maximmum guest must be in range from 1 to 100",
+                                    ge: "Maximum guest must be greater or equals to minimum guest"
+                                },
+                                departure: {
+                                    selected: "Please select departure of this tour"
+                                },
+                                destination1: {
+                                    selected: "Please select the destination of this tour"
+                                },
+                                guide1: {
+                                    selected: "Please select tour guide"
                                 }
                             }
                         });

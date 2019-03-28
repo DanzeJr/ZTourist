@@ -1,5 +1,5 @@
 <%-- 
-    Document   : addDestination
+    Document   : tourStaff
     Created on : Mar 25, 2019, 10:31:47 PM
     Author     : Danze
 --%>
@@ -14,21 +14,11 @@
             #datetimepicker1 table tr th{
                 color: black;
             }
-            .checkValidate label.error, .checkValidate sup, .checkValidate .errorMessage {
-                color: red !important;
-                font-size: 12px !important;
-            }
-            .checkValidate .form-group li {
-                list-style: none;
-            }
-            .checkValidate .form-group {
-                clear: none;
-            }
         </style>
-        <title>Z Tourist Staff - New Tour</title>
+        <title>Z Tourist Staff - Tours</title>
     </head>
     <body class="tg-home tg-homevthree tg-login">
-        <s:action name="initStaff"/>
+        <s:action name="init"/>
         <!--************************************
                                 Loader Start
         *************************************-->
@@ -72,10 +62,10 @@
                 </li>
                 </s:if>                
                 <s:if test="%{#session.ROLE == 'admin'}">
-                <li><a href="viewAllCustomers">Customer</a>
-                    <ul>
-                        <li><a href="viewWaitingBooking">Check Booking</a></li>
-                    </ul>
+                <li><a href="viewAllCustomers">Customer</a>       
+                    <ul>                  
+                        <li><a href="viewWaitingBooking">Check Booking</a></li>     
+                    </ul>         
                 </li>
                 </s:if>
                 <s:if test="%{#session.ROLE == 'admin'}">
@@ -158,10 +148,10 @@
                                                 <li><a href="link">Search destination</a></li>
                                             </ul>
                                         </li>
-                                        <li class="menu-item-has-children current-menu-item"><a href="viewAllToursStaff">Tours</a>
+                                        <li class="menu-item-has-children"><a href="viewAllToursStaff">Tours</a>
                                             <s:if test="%{#session.ROLE == 'admin'}">
                                                 <ul class="sub-menu">
-                                                    <li class="current-menu-item"><a href="addTour.jsp">Add new tour</a></li>
+                                                    <li><a href="addTour.jsp">Add new tour</a></li>
                                                 </ul>
                                             </s:if>
                                         </li>
@@ -178,10 +168,10 @@
                                             </li>
                                         </s:if>                
                                         <s:if test="%{#session.ROLE == 'admin'}">
-                                            <li><a href="viewAllCustomers">Customer</a>
-                                                <ul>                        
-                                                    <li><a href="viewWaitingBooking">Check Booking</a></li>             
-                                                </ul>           
+                                            <li><a href="viewAllCustomers">Customer</a>     
+                                                <ul>                       
+                                                    <li><a href="viewWaitingBooking">Check Booking</a></li>       
+                                                </ul>     
                                             </li>
                                         </s:if>
                                         <s:if test="%{#session.ROLE == 'admin'}">
@@ -208,7 +198,7 @@
                                 <h1>Experience the Wonder</h1>
                                 <h2>People don’t take trips, trips take People</h2>
                                 <s:form cssClass="tg-formtheme tg-formtrip" action="searchTourStaff">
-                                    <fieldset>                                        
+                                    <fieldset>
                                         <div class="form-group">
                                             <div class="tg-select">
                                                 <s:select cssClass="selectpicker" name="destSearch" headerKey="-1" headerValue="Destinations" list="%{#request.Dest}" data-live-search="true" data-width="100%"/>
@@ -256,8 +246,8 @@
                     <s:if test="%{#request.Ptour != null}">
                         <s:iterator value="%{#request.Ptour}">
                             <figure class="item" data-vide-bg="poster: <s:property value="%{titleImage}"/>" data-vide-options="position: 0% 50%"></figure>
-                        </s:iterator>
-                    </s:if>
+                            </s:iterator>
+                        </s:if>
                 </div>
             </div>
             <!--************************************
@@ -266,125 +256,130 @@
             <!--************************************
                             Main Start
             *************************************-->
-            <main id="tg-main" class="tg-main tg-haslayout">
-                <s:if test="hasActionErrors()">
-                    <h4 style="text-align: center; color: red; padding-top: 4%;"><s:actionerror/></h4>
-                </s:if>
-                <s:form cssClass="tg-formtheme tg-formdashboard checkValidate" action="addTour" method="POST" enctype="multipart/form-data">
-                    <div class="tg-imgholder" style="width: 100%; height: 10%">
-                        <center>
-                        <figure><img id="imgTitle" style="height: 100%; width: 80%" src="<s:if test="%{titleImage != null}"><s:property value="%{titleImage}"/></s:if><s:else>images/tours/default.jpg</s:else>" alt="Tour Image"></figure>
-                        <s:file id="titleImg" cssStyle="display: none" name="photo"/>
-                        <a class="tg-btn" href="javascript:void(0);" onclick="$('#titleImg').click();">Choose Tour Image</a>
-                        </center>
+            <main id="tg-main" class="tg-main tg-sectionspace tg-haslayout tg-bglight">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div id="tg-content" class="tg-content">
+                                <div class="tg-listing tg-listingvthree">
+                                    <div class="tg-sectiontitle">
+                                        <h2>All Tours</h2>
+                                    </div>
+                                    <s:if test="%{listTour != null}">
+                                        <s:if test="%{!listTour.isEmpty()}">
+                                            <s:iterator value="%{listTour}">
+                                                <div class="tg-populartour tg-populartourvtwo">
+                                                    <s:url action="viewTourDetails" var="tourDetails">
+                                                        <s:param name="tourID" value="%{id}" />
+                                                    </s:url>
+                                                    <figure>
+                                                        <s:a href="%{tourDetails}"><img style="width: 401px; height: 285px;" src="<s:property value="%{titleImage}"/>" alt="tour image"></s:a>
+                                                    </figure>
+                                                        <div class="tg-populartourcontent">
+                                                            <div class="tg-populartourtitle">
+                                                                <h3 style="color: #00aff0"><s:a href="%{tourDetails}"><s:property value="%{name}"/></s:a></h3>
+                                                                <br/>
+                                                                <h5>
+                                                                <s:iterator value="%{listPlace}" status="counter">
+                                                                    <s:if test="%{#counter.count > 1}"> - </s:if>
+                                                                    <s:property value="%{name}"/> 
+                                                                </s:iterator>
+                                                            </h5>
+                                                        </div>
+                                                        <div class="tg-description">
+                                                            <p> - <s:property value="%{desc}"/> <s:a cssStyle="text-decoration:none;" href="%{tourDetails}">View more...</s:a></p>
+                                                            </div>
+                                                            <div class="tg-populartourfoot">
+                                                                <div class="tg-durationrating">
+                                                                    <span class="tg-tourduration"><s:property value="%{duration}"/> Day(s)</span>
+                                                                <p>Transport: <s:property value="%{transport}"/></p>                                                                                                                                  
+                                                            </div>
+                                                        </div>
+                                                        <div class="tg-priceavailability">
+                                                            <div class="tg-availhead">
+                                                                <time><s:property value="%{fromDate}"/> - <s:property value="%{toDate}"/></time>
+                                                            </div>
+                                                            <div class="tg-pricearea">
+                                                                <span>From</span>
+                                                                <h4><s:property value="%{fareAdult}"/>$</h4>
+                                                            </div>                                                            
+                                                            <s:a cssClass="tg-btn" href="%{tourDetails}"><span>View Tour</span></s:a>
+                                                            </div>
+                                                        </div>
+                                                    </div>                                                    
+                                            </s:iterator>
+                                            <nav class="tg-pagination">
+                                                <ul>
+                                                    <s:if test="%{totalPages >= 3}"> <%-- if there is 3 or more than 3 pages --%>
+                                                        <s:url action="viewAllToursStaff" var="nextPage">
+                                                            <s:param name="page" value="%{page + 1}" />
+                                                            <s:param name="skipPage" value="%{skipPage + 5}"/>
+                                                        </s:url>
+                                                        <s:url action="viewAllToursStaff" var="prePage">
+                                                            <s:param name="page" value="%{page - 1}" />
+                                                            <s:param name="skipPage" value="%{skipPage - 5}"/>
+                                                        </s:url>
+                                                        <s:if test="%{page == 1}"> <%-- if first page is active --%>
+                                                            <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page}"/></s:a></li>                                                
+                                                            <li><s:a href="%{nextPage}"><s:property value="%{page + 1}"/></s:a></li>
+                                                                <s:url action="viewAllToursStaff" var="toPage">
+                                                                    <s:param name="page" value="%{page + 2}" />
+                                                                    <s:param name="skipPage" value="%{skipPage + 10}"/>
+                                                                </s:url>
+                                                            <li><s:a href="%{toPage}"><s:property value="%{page + 2}"/></s:a></li>
+                                                            <li class="tg-nextpage"><s:a href="%{nextPage}"><i class="fa fa-angle-right"></i></s:a></li>
+                                                            </s:if>
+                                                            <s:elseif test="%{page == totalPages}"> <%-- if last page is active --%>
+                                                                <s:url action="viewAllToursStaff" var="toPage">
+                                                                    <s:param name="page" value="%{page - 2}" />
+                                                                    <s:param name="skipPage" value="%{skipPage - 10}"/>
+                                                                </s:url>    
+                                                            <li class="tg-prevpage"><s:a href="%{toPage}"><i class="fa fa-angle-left"></i></s:a></li>
+                                                            <li><s:a href="%{toPage}"><s:property value="%{page - 2}"/></s:a></li>                                                
+                                                            <li><s:a href="%{prePage}"><s:property value="%{page - 1}"/></s:a></li>
+                                                            <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page}"/></s:a></li>
+                                                            </s:elseif>
+                                                            <s:else> <%-- if neither first and last page is active --%>
+                                                            <li class="tg-prevpage"><s:a href="%{prePage}"><i class="fa fa-angle-left"></i></s:a></li>
+                                                            <li><s:a href="%{prevPage}"><s:property value="%{page - 1}"/></s:a></li>
+                                                            <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page}"/></s:a></li>
+                                                            <li><s:a href="%{nextPage}"><s:property value="%{page + 1}"/></s:a></li>
+                                                            <li class="tg-nextpage"><s:a href="%{nextPage}"><i class="fa fa-angle-right"></i></s:a></li>
+                                                            </s:else>
+                                                        </s:if>
+                                                        <s:elseif test="%{totalPages == 1}"> <%-- else if only one page show --%>
+                                                        <li class="tg-active"><s:a href="javascript:void(0);">1</s:a></li>
+                                                        </s:elseif>
+                                                        <s:elseif test="%{totalPages == 2}"> <%-- else if only two pages show --%>
+                                                            <s:url action="viewAllToursStaff" var="nextPage">
+                                                                <s:param name="page" value="%{page + 1}" />
+                                                                <s:param name="skipPage" value="%{skipPage + 5}"/>
+                                                            </s:url>
+                                                            <s:url action="viewAllToursStaff" var="prePage">
+                                                                <s:param name="page" value="%{page - 1}" />
+                                                                <s:param name="skipPage" value="%{skipPage - 5}"/>
+                                                            </s:url>
+                                                            <s:if test="%{page == 1}"> <%-- if page 1 is active --%>
+                                                            <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page}"/></s:a></li>                                                
+                                                            <li><s:a href="%{nextPage}"><s:property value="%{page + 1}"/></s:a></li>
+                                                            </s:if>
+                                                            <s:else> <%-- if page 2 is active --%>
+                                                            <li><s:a href="%{prePage}"><s:property value="%{page - 1}"/></s:a></li>                                 
+                                                            <li class="tg-active"><s:a href="javascript:void(0);"><s:property value="%{page}"/></s:a></li>
+                                                            </s:else>
+                                                        </s:elseif>
+                                                </ul>
+                                            </nav>
+                                        </s:if>
+                                        <s:else>
+                                            <h3 style="text-align: center">No tour found!</h3>
+                                        </s:else>
+                                    </s:if>                                    
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div style="padding: 10%">                        
-                        <div class="form-group" id="idV">
-                            <label>Tour ID <sup>*</sup></label>
-                            <s:textfield cssClass="form-control" name="id" id="id" value="%{id}" required="true"/>
-                            <s:fielderror fieldName="id"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Tour Name <sup>*</sup></label>
-                            <s:textfield cssClass="form-control" name="name" value="%{name}" required="true"/>
-                        </div>
-                        <div class="form-group">
-                        <div class="form-group" style="width: 48%">
-                            <label>From Date <sup>*</sup></label>
-                            <s:textfield id="fromDatePicker" cssClass="form-control" name="fromDate" value="%{fromDate}" required="true"/>
-                        </div>
-                        <div class="form-group" style="width: 48%; float: right">
-                            <label>To Date <sup>*</sup></label>
-                            <s:textfield id="toDatePicker" cssClass="form-control" name="toDate" value="%{toDate}" required="true"/>
-                        </div>
-                        </div>
-                        <div class="form-group">
-                        <div class="form-group" style="width: 48%">
-                            <label>Adult Fare <sup>*</sup></label>
-                            <s:textfield cssClass="form-control" name="fareAdult" value="%{fareAdult}" required="true"/>
-                        </div>
-                        <div class="form-group" style="width: 48%; float: right">
-                            <label>Kid Fare <sup>*</sup></label>
-                            <s:textfield cssClass="form-control" name="fareKid" value="%{fareKid}" required="true"/>
-                        </div>
-                        </div>
-                        <div class="form-group">
-                        <div class="form-group" style="width: 48%">
-                            <label>Minimum Guest <sup>*</sup></label>
-                            <s:textfield id="minGuest" cssClass="form-control" name="minGuest" value="%{minGuest}" required="true"/>
-                        </div>
-                        <div class="form-group" style="width: 48%; float: right">
-                            <label>Maximum Guest <sup>*</sup></label>
-                            <s:textfield id="maxGuest" cssClass="form-control" name="maxGuest" value="%{maxGuest}" required="true"/>
-                        </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Transport <sup>*</sup></label>
-                            <s:textfield cssClass="form-control" name="transport" value="%{transport}" required="true"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Description </label>
-                            <s:textarea cssClass="form-control" name="des" value="%{des}"/>
-                        </div>
-                        <div class="form-group">
-                            <h3 style="font-weight: bold">Destinations: </h3>
-                        </div>
-                        <div class="form-group" style="width: 48%">
-                            <label>Departure <sup>*</sup></label>
-                            <div>
-                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Departure" data-live-search="true" list="%{#request.Dest}" name="departure" required="true"/>
-                            </div>
-                        </div>
-                        <div class="form-group" style="width: 48%; float: right">
-                            <label>Destination 1 <sup>*</sup></label>
-                            <div>
-                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Destination 1" data-live-search="true" list="%{#request.Dest}" name="destination1" required="true"/>
-                            </div>
-                        </div>
-                        <div class="form-group" style="width: 48%">
-                            <label>Destination 2 </label>
-                            <div>
-                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Destination 2" data-live-search="true" list="%{#request.Dest}" name="destination2"/>
-                            </div>
-                        </div>
-                        <div class="form-group" style="width: 48%; float: right">
-                            <label>Destination 3 </label>
-                            <div>
-                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Destination 3" data-live-search="true" list="%{#request.Dest}" name="destination3"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <h3 style="font-weight: bold">Guides: </h3>
-                        </div>    
-                        <div class="form-group" style="width: 48%">
-                            <label>Guide 1 <sup>*</sup></label>
-                            <div>
-                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Guide 1" data-live-search="true" list="%{#request.Guide}" name="guide1" required="true"/>
-                            </div>
-                        </div>
-                        <div class="form-group" style="width: 48%; float: right">
-                            <label>Guide 2 </label>
-                            <div>
-                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Guide 2" data-live-search="true" list="%{#request.Guide}" name="guide2"/>
-                            </div>
-                        </div>
-                        <div class="form-group" style="width: 48%">
-                            <label>Guide 3 </label>
-                            <div>
-                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Guide 3" data-live-search="true" list="%{#request.Guide}" name="guide3"/>
-                            </div>
-                        </div>
-                        <div class="form-group" style="width: 48%; float: right">
-                            <label>Guide 4 </label>
-                            <div>
-                                <s:select cssClass="form-control selectpicker" headerKey="-1" headerValue="Guide 4" data-live-search="true" list="%{#request.Guide}" name="guide4"/>
-                            </div>
-                        </div>
-                    <center>
-                        <button class="tg-btn" type="submit"><span>Add Tour</span></button>
-                    </center>                       
-                    </div>
-                </s:form>
+                </div>
             </main>
             <!--************************************
                             Main End
@@ -487,7 +482,6 @@
         <script src="js/main.js"></script>
         <script src="js/bootstrap-datetimepicker.min.js"></script>
         <script src="js/jquery.validate.min.js"></script>
-        <script src="js/countrypicker.min.js"></script>
         <script type="text/javascript">
             /* -------------------------------------
              Datetimepicker
@@ -503,21 +497,7 @@
                 $('#datetimepicker1').data('DateTimePicker').show();
             });
             $("#datetimepicker2").attr("placeholder", "From Date");
-            
-            $('#fromDatePicker').datetimepicker({
-                format: 'Y-MM-DD HH:mm:ss'
-            });
-            $('#toDatePicker').datetimepicker({
-                useCurrent: false,
-                format: 'Y-MM-DD HH:mm:ss'
-            });
-            $("#fromDatePicker").on("dp.change", function (e) {
-                $('#toDatePicker').data("DateTimePicker").minDate(e.date);
-            });
-            $("#toDatePicker").on("dp.change", function (e) {
-                $('#fromDatePicker').data("DateTimePicker").maxDate(e.date);
-            });
-            
+
             /* -------------------------------------
              PRETTY PHOTO GALLERY
              -------------------------------------- */
@@ -541,153 +521,6 @@
                     "pagedim-black"
                 ]
             });
-                        
         </script>
-        <script type="text/javascript">
-
-                $('#titleImg').change(function () { //show preview avatar
-                    if (this.files && this.files[0]) {
-                        var reader = new FileReader();
-                        reader.onload = function (e) {
-                            $('#imgTitle').attr('src', e.target.result);
-                        },
-                        reader.readAsDataURL(this.files[0]);
-                    }
-                });
-                
-                var u = $('#id').val();
-                $('#id').change(function () {
-                    if (u.toString().toLowerCase() === $('#id').val().toString().toLowerCase()) {
-                        $('#idV > .errorMessage').show();
-                    } else {
-                        $('#idV > .errorMessage').hide();
-                    }
-                });
-                
-                $.validator.addMethod("price", function (value, element) { //validate price
-                    return this.optional(element) || /^(\d{1,18})(\.\d{1,2})*?$/.test(value);;
-                });
-                $.validator.addMethod("selected", function (value, element) {
-                    return this.optional(element) || value !== '-1';;
-                });
-                $.validator.addMethod("ge", function (value, element, param) {
-                    return this.optional(element) || parseInt(value) >= parseInt($(param).val());
-                });
-                $.validator.addMethod("le", function (value, element, param) {
-                    return this.optional(element) || parseInt(value) <= parseInt($(param).val());
-                });
-                                
-                $(document).ready(function () {
-                    $(".checkValidate").each(function () {
-
-                        $(this).validate({
-                            rules: {
-                                id: {
-                                    required: true,
-                                    maxlength: 30
-                                },
-                                name: {
-                                    required: true,
-                                    maxlength: 100
-                                },
-                                fromDate: {
-                                    required: true
-                                },
-                                toDate: {
-                                    required: true
-                                },
-                                des: {
-                                    maxlength: 200
-                                },
-                                fareAdult: {
-                                    required: true,
-                                    price: true
-                                },
-                                fareKid: {
-                                    required: true,
-                                    price: true
-                                },
-                                transport: {
-                                    required: true,
-                                    maxlength: 50
-                                },
-                                minGuest: {
-                                    required: true,
-                                    number: true,
-                                    range: [0, 100],
-                                    le: "#maxGuest"
-                                },
-                                maxGuest: {
-                                    required: true,
-                                    number: true,
-                                    range: [1, 100],
-                                    ge: "#minGuest"
-                                },
-                                departure: {
-                                    selected: true
-                                },
-                                destination1: {
-                                    selected: true
-                                },
-                                guide1: {
-                                    selected: true
-                                }
-                            },
-                            messages: {
-                                id: {
-                                    required: "Please enter tour ID",
-                                    maxlength: "Tour ID must not be greater than 30 characters long"
-                                },
-                                name: {
-                                    required: "Please enter tour name",
-                                    maxlength: "Tour name must not be greater than 50 characters long"
-                                },
-                                fromDate: {
-                                    required: "Please choose when tour start"
-                                },
-                                toDate: {
-                                    required: "Please choose when tour end"
-                                },
-                                des: {
-                                    maxlength: "Description must not be greater than 200 characters long"
-                                },
-                                fareAdult: {
-                                    required: "Please enter adult fare",
-                                    price: "Adult fare must be a float number with maximum 2 decimal places"
-                                },
-                                fareKid: {
-                                    required: "Please enter kid fare",
-                                    price: "Kid fare must be a float number with maximum 2 decimal places"
-                                },
-                                transport: {
-                                    required: "Please enter the transport of this tour",
-                                    maxlength: "Transport must not be greater than 50 characters long"
-                                },
-                                minGuest: {
-                                    required: "Please enter minimum guest of this tour",
-                                    number: "Minimum guest must be a number",
-                                    range: "Minimum guest must be in range from 0 to 100",
-                                    le: "Minimum guest must be lesser or equals to maximum guest"
-                                },
-                                maxGuest: {
-                                    required: "Please enter maximum guest of this tour",
-                                    number: "Maximum guest must be a number",
-                                    range: "Maximmum guest must be in range from 1 to 100",
-                                    ge: "Maximum guest must be greater or equals to minimum guest"
-                                },
-                                departure: {
-                                    selected: "Please select departure of this tour"
-                                },
-                                destination1: {
-                                    selected: "Please select the destination of this tour"
-                                },
-                                guide1: {
-                                    selected: "Please select tour guide"
-                                }
-                            }
-                        });
-                    });
-                });
-            </script>
     </body>
 </html>

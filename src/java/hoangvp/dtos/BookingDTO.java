@@ -7,27 +7,20 @@ package hoangvp.dtos;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  *
  * @author Danze
  */
 public class BookingDTO implements Serializable{
-    private String id, tourID, guestID, request, pickUpPlace, promotionCode, status;
-    private int room, ticketAdult, ticketKid;
+    private String id, customerID, couponCode, comment, status;
     private Timestamp date;
+    private List<TourDTO> listTour;
 
-    public BookingDTO(String id, String tourID, String guestID, String status, int room, int ticketAdult, int ticketKid, Timestamp date) {
-        this.id = id;
-        this.tourID = tourID;
-        this.guestID = guestID;
-        this.status = status;
-        this.room = room;
-        this.ticketAdult = ticketAdult;
-        this.ticketKid = ticketKid;
-        this.date = date;
+    public BookingDTO() {
     }
-
+    
     public String getId() {
         return id;
     }
@@ -36,44 +29,12 @@ public class BookingDTO implements Serializable{
         this.id = id;
     }
 
-    public String getTourID() {
-        return tourID;
+    public String getCouponCode() {
+        return couponCode;
     }
 
-    public void setTourID(String tourID) {
-        this.tourID = tourID;
-    }
-
-    public String getGuestID() {
-        return guestID;
-    }
-
-    public void setGuestID(String guestID) {
-        this.guestID = guestID;
-    }
-
-    public String getRequest() {
-        return request;
-    }
-
-    public void setRequest(String request) {
-        this.request = request;
-    }
-
-    public String getPickUpPlace() {
-        return pickUpPlace;
-    }
-
-    public void setPickUpPlace(String pickUpPlace) {
-        this.pickUpPlace = pickUpPlace;
-    }
-
-    public String getPromotionCode() {
-        return promotionCode;
-    }
-
-    public void setPromotionCode(String promotionCode) {
-        this.promotionCode = promotionCode;
+    public void setCouponCode(String couponCode) {
+        this.couponCode = couponCode;
     }
 
     public String getStatus() {
@@ -84,30 +45,6 @@ public class BookingDTO implements Serializable{
         this.status = status;
     }
 
-    public int getRoom() {
-        return room;
-    }
-
-    public void setRoom(int room) {
-        this.room = room;
-    }
-
-    public int getTicketAdult() {
-        return ticketAdult;
-    }
-
-    public void setTicketAdult(int ticketAdult) {
-        this.ticketAdult = ticketAdult;
-    }
-
-    public int getTicketKid() {
-        return ticketKid;
-    }
-
-    public void setTicketKid(int ticketKid) {
-        this.ticketKid = ticketKid;
-    }
-
     public Timestamp getDate() {
         return date;
     }
@@ -115,6 +52,29 @@ public class BookingDTO implements Serializable{
     public void setDate(Timestamp date) {
         this.date = date;
     }
-    
-    
+
+    public String getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
+    }
+
+    public List<TourDTO> getListTour() {
+        return listTour;
+    }
+
+    public void setListTour(List<TourDTO> listTour) {
+        this.listTour = listTour;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+        
 }

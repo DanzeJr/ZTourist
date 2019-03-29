@@ -59,6 +59,11 @@ public class AuthFilter implements Filter {
         guest.add("loginStaff.jsp");
         guest.add("signInStaff");
         guest.add("signInStaff.action");
+        guest.add("viewTourDetails");
+        guest.add("viewTourDetails.action");
+        guest.add("tourBooking.jsp");
+        guest.add("addToCart");
+        guest.add("addToCart.action");
 
         //CUSTOMER
         customer = new ArrayList<>();
@@ -82,6 +87,24 @@ public class AuthFilter implements Filter {
         customer.add("changePassword.action");
         customer.add("signOut");
         customer.add("signOut.action");
+        customer.add("viewTourDetails");
+        customer.add("viewTourDetails.action");
+        customer.add("tourBooking.jsp");
+        customer.add("addToCart");
+        customer.add("addToCart.action");
+        customer.add("viewCart");
+        customer.add("viewCart.action");
+        customer.add("cart.jsp");
+        customer.add("updateCart");
+        customer.add("updateCart.action");
+        customer.add("removeTourInCart");
+        customer.add("removeTourInCart.action");
+        customer.add("payment.jsp");
+        customer.add("checkOut");
+        customer.add("checkOut.action");
+        customer.add("paymentResult.jsp");
+        customer.add("confirmBooking");
+        customer.add("confirmBooking.action");
 
         //GUIDE
         guide = new ArrayList<>();

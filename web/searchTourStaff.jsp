@@ -284,8 +284,8 @@
                                                                     <s:if test="%{#counter.count > 1}"> - </s:if>
                                                                     <s:property value="%{name}"/> 
                                                                 </s:iterator>
-                                                            </h5>
-                                                        </div>
+                                                                </h5>
+                                                            </div>
                                                         <div class="tg-description">
                                                             <p> - <s:property value="%{desc}"/> <s:a cssStyle="text-decoration:none;" href="%{tourDetails}">View more...</s:a></p>
                                                             </div>

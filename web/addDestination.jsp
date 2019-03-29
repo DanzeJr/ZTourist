@@ -457,7 +457,7 @@
                 });
                 
                 var u = $('#id').val();
-                $('#id').change(function () {
+                $('#id').keyup(function () {
                     if (u.toString().toLowerCase() === $('#id').val().toString().toLowerCase()) {
                         $('#idV > .errorMessage').show();
                     } else {

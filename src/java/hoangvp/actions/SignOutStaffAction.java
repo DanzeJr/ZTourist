@@ -34,6 +34,7 @@ public class SignOutStaffAction extends ActionSupport implements SessionAware, S
             session.remove("ROLE");
             session.remove("USER");
             session.remove("AVA");
+            session.remove("CART");
             response = ServletActionContext.getResponse();
             response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
             response.setHeader("Pragma", "no-cache"); // HTTP 1.0.

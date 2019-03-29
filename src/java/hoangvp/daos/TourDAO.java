@@ -54,6 +54,105 @@ public class TourDAO implements Serializable{
         return check;
     }
     
+    public TourDTO getTourDetailsByID(String id) throws Exception {
+        TourDTO dto = null;
+        String name, titleImg, fromDate;
+        float fareAdult, fareKid, duration;
+        int maxGuest;
+        
+        try {
+            String sql = "SELECT Name, TitleImage, FromDate, FareAdult, FareKid, MaxGuest, DATEDIFF(day, FromDate, ToDate) AS Duration FROM tblTour WHERE ID = ? AND Status = 'Active'";
+            conn = MyConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, id);
+            rs = pre.executeQuery();            
+            if (rs.next()) {
+                name = rs.getString("Name");
+                titleImg = rs.getString("TitleImage");
+                fromDate = rs.getTimestamp("FromDate").toLocalDateTime().format(DateTimeFormatter.ofPattern("dd/MMM/yyyy"));
+                fareAdult = rs.getFloat("FareAdult");
+                fareKid = rs.getFloat("FareKid");
+                maxGuest = rs.getInt("MaxGuest");
+                duration = rs.getInt("Duration");
+                dto = new TourDTO();
+                dto.setName(name);
+                dto.setTitleImage(titleImg);
+                dto.setFromDate(fromDate);
+                dto.setFareAdult(fareAdult);
+                dto.setFareKid(fareKid);
+                dto.setMaxGuest(maxGuest);
+                dto.setDuration(duration);
+            }
+        } finally {
+            closeConnection();
+        }
+        return dto;
+    }
+    
+    public TourDTO getTourCartByID(String id) throws Exception {
+        TourDTO dto = null;
+        String name, titleImg;
+        float fareAdult, fareKid;
+        
+        try {
+            String sql = "SELECT Name, TitleImage, FareAdult, FareKid FROM tblTour WHERE ID = ? AND Status = 'Active'";
+            conn = MyConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, id);
+            rs = pre.executeQuery();            
+            if (rs.next()) {
+                name = rs.getString("Name");
+                titleImg = rs.getString("TitleImage");
+                fareAdult = rs.getFloat("FareAdult");
+                fareKid = rs.getFloat("FareKid");
+                dto = new TourDTO();
+                dto.setName(name);
+                dto.setTitleImage(titleImg);
+                dto.setFareAdult(fareAdult);
+                dto.setFareKid(fareKid);
+            }
+        } finally {
+            closeConnection();
+        }
+        return dto;
+    }
+    
+    public int getMaxGuestByID(String id) throws Exception {
+        int maxGuest = 0;
+        
+        try {
+            String sql = "SELECT MaxGuest FROM tblTour WHERE ID = ?";
+            conn = MyConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, id);
+            rs = pre.executeQuery();            
+            if (rs.next()) {
+                maxGuest = rs.getInt("MaxGuest");
+            }
+        } finally {
+            closeConnection();
+        }
+        return maxGuest;
+    }
+    
+    public int getTakenSpotByTourID(String id) throws Exception {
+        int takenSpot = 0;
+        
+        try {
+            String sql = "SELECT SUM(TicketAdult + TicketKid) AS TakenSpot FROM tblBookingDetail WHERE TourID = ?";
+            conn = MyConnection.getConnection();            
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, id);
+            rs = pre.executeQuery();
+            if (rs.next()) {
+                takenSpot = rs.getInt("TakenSpot");
+            }
+        } finally {
+            closeConnection();
+        }
+        return takenSpot;
+    }
+    
     public List<TourDTO> getTopNearestTours() throws Exception {
         List<TourDTO> result = null;
         TourDTO dto;
@@ -89,8 +188,8 @@ public class TourDAO implements Serializable{
         
         try {
             String sql = "SELECT TOP 5 TourID, TitleImage, FareAdult, Duration"
-                    + " FROM tblBooking JOIN (SELECT ID, TitleImage, FareAdult, DATEDIFF(day, FromDate, ToDate) AS Duration FROM tblTour) AS tbTour ON TourID = tbTour.ID"
-                    + " WHERE Status = 'Active'"
+                    + " FROM tblBookingDetail JOIN (SELECT ID, TitleImage, FareAdult, Status, DATEDIFF(day, FromDate, ToDate) AS Duration FROM tblTour) AS tbTour ON TourID = tbTour.ID"
+                    + " WHERE tbTour.Status = 'Active'"
                     + " GROUP BY TourID, TitleImage, FareAdult, Duration"
                     + " ORDER BY SUM(TicketAdult + TicketKid) DESC";
             conn = MyConnection.getConnection();
@@ -139,6 +238,24 @@ public class TourDAO implements Serializable{
             closeConnection();
         }
         return result;
+    }
+    
+    public String getLastDestinationByTourID(String id) throws Exception {
+        String name = "";
+        
+        try {
+            String sql = "SELECT TOP 1 Name FROM tblTourDetail JOIN tblPlace ON PlaceID = ID WHERE TourID = ? ORDER BY Number DESC";
+            conn = MyConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, id);
+            rs = pre.executeQuery();
+            if (rs.next()) {
+                name = rs.getString("Name");
+            }
+        } finally {
+            closeConnection();
+        }
+        return name;
     }
     
     public List<EmployeeDTO> findGuidesByTourID(String id) throws Exception {

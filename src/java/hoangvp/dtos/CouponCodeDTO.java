@@ -12,15 +12,15 @@ import java.sql.Timestamp;
  *
  * @author Danze
  */
-public class PromotionCodeDTO implements Serializable{
+public class CouponCodeDTO implements Serializable{
     private String code;
     private int offPercent;
     private Timestamp startDate, endDate;
 
-    public PromotionCodeDTO() {
+    public CouponCodeDTO() {
     }
 
-    public PromotionCodeDTO(String code, int offPercent, Timestamp startDate, Timestamp endDate) {
+    public CouponCodeDTO(String code, int offPercent, Timestamp startDate, Timestamp endDate) {
         this.code = code;
         this.offPercent = offPercent;
         this.startDate = startDate;

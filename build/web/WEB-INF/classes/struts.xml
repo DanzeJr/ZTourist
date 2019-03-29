@@ -24,6 +24,9 @@
         <action name="initStaff" class="hoangvp.actions.InitStaffAction">
             <result name="success">homeStaff.jsp</result>
         </action>
+        <action name="initCart" class="hoangvp.actions.InitCartAction">
+            <result name="success">index.jsp</result>
+        </action>
         
         <action name="searchTour" class="hoangvp.actions.SearchTourAction">
             <result name="success">searchTour.jsp</result>
@@ -52,6 +55,37 @@
         <action name="changePassword" class="hoangvp.actions.ChangePasswordAction">
             <result name="input">changePassword.jsp</result>
             <result name="success">changePassword.jsp</result>
+        </action>
+        <action name="viewTourDetails" class="hoangvp.actions.ViewTourDetailsAction">
+            <result name="error">404NotFound.jsp</result>
+            <result name="success">tourBooking.jsp</result>
+        </action>
+        <action name="viewCart" class="hoangvp.actions.ViewCartAction">
+            <result name="success">cart.jsp</result>
+        </action>
+        <action name="addToCart" class="hoangvp.actions.AddToCartAction">
+            <result name="login">register.jsp</result>
+            <result name="error">404NotFound.jsp</result>
+            <result name="input">tourBooking.jsp</result>
+            <result name="success" type="redirectAction">viewCart</result>
+        </action>
+        <action name="updateCart" class="hoangvp.actions.UpdateCartAction">
+            <result name="error">404NotFound.jsp</result>
+            <result name="success">cart.jsp</result>
+        </action>
+        <action name="removeTourInCart" class="hoangvp.actions.RemoveTourInCartAction">
+            <result name="error">404NotFound.jsp</result>
+            <result name="success" type="redirectAction">viewCart</result>
+        </action>
+        <action name="checkOut" class="hoangvp.actions.CheckOutAction">
+            <result name="error">404NotFound.jsp</result>
+            <result name="input">cart.jsp</result>
+            <result name="success">payment.jsp</result>
+        </action>
+        <action name="confirmBooking" class="hoangvp.actions.ConfirmBookingAction">
+            <result name="error">404NotFound.jsp</result>
+            <result name="input">payment.jsp</result>
+            <result name="success">paymentResult.jsp</result>
         </action>
         
         <action name="signInStaff" class="hoangvp.actions.SignInStaffAction">

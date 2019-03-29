@@ -15,9 +15,9 @@ import java.util.List;
  */
 public class TourDTO implements Serializable{
     private String id, name, desc, transport, status, titleImage, fromDate, toDate;
-    private float fareAdult, fareKid, duration;
+    private float fareAdult, fareKid, duration, total;
     private Timestamp fromDateTime, toDateTime;
-    private int minGuest, maxGuest;
+    private int minGuest, maxGuest, ticketAdult, ticketKid;
     private List<PlaceDTO> listPlace;
     private List<EmployeeDTO> listGuide;
 
@@ -145,6 +145,22 @@ public class TourDTO implements Serializable{
         this.fareKid = fareKid;
     }
 
+    public int getTicketAdult() {
+        return ticketAdult;
+    }
+
+    public void setTicketAdult(int ticketAdult) {
+        this.ticketAdult = ticketAdult;
+    }
+
+    public int getTicketKid() {
+        return ticketKid;
+    }
+
+    public void setTicketKid(int ticketKid) {
+        this.ticketKid = ticketKid;
+    }
+
     public String getTransport() {
         return transport;
     }
@@ -183,6 +199,14 @@ public class TourDTO implements Serializable{
 
     public void setListGuide(List<EmployeeDTO> listGuide) {
         this.listGuide = listGuide;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
     }
     
 }

@@ -1,0 +1,46 @@
+2019-03-29 08:07:50 ERROR ViewCartAction:69 - null
+2019-03-29 08:10:28 ERROR ViewCartAction:69 - null
+2019-03-29 08:11:29 ERROR ViewCartAction:69 - null
+2019-03-29 08:11:56 ERROR ViewCartAction:69 - null
+2019-03-29 10:08:36 ERROR CheckOutAction:95 - null
+2019-03-29 10:10:09 ERROR CheckOutAction:95 - null
+2019-03-29 10:11:32 ERROR CheckOutAction:95 - null
+2019-03-29 10:13:11 ERROR CheckOutAction:95 - null
+2019-03-29 10:18:19 ERROR CheckOutAction:95 - null
+2019-03-29 13:56:41 ERROR ViewCartAction:71 - null
+2019-03-29 19:18:30 ERROR UpdateCartAction:119 - For input string: ""
+2019-03-29 19:18:30 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:18:46 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:18:53 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:18:58 ERROR ViewCartAction:71 - For input string: ""
+2019-03-29 19:18:58 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:19:10 ERROR ViewCartAction:71 - For input string: ""
+2019-03-29 19:19:11 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:19:13 ERROR CheckOutAction:99 - For input string: ""
+2019-03-29 19:19:13 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:21:49 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:21:58 ERROR ConfirmBookingAction:126 - For input string: ""
+2019-03-29 19:21:58 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:22:27 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:22:39 ERROR ViewCartAction:71 - For input string: ""
+2019-03-29 19:22:39 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:22:45 ERROR ViewCartAction:71 - For input string: ""
+2019-03-29 19:22:45 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:22:51 ERROR ViewCartAction:71 - For input string: ""
+2019-03-29 19:22:51 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:24:00 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:24:14 ERROR ViewCartAction:71 - null
+2019-03-29 19:24:35 ERROR UpdateCartAction:119 - For input string: ""
+2019-03-29 19:24:35 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:25:38 ERROR ViewCartAction:71 - null
+2019-03-29 19:28:26 ERROR UpdateCartAction:119 - For input string: ""
+2019-03-29 19:28:26 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 19:38:43 ERROR InitCartAction:55 - For input string: ""
+2019-03-29 20:14:01 ERROR ViewCartAction:71 - null
+2019-03-29 20:17:20 ERROR ViewCartAction:71 - null
+2019-03-29 20:45:45 ERROR ViewCartAction:71 - null
+2019-03-29 20:46:13 ERROR ConfirmBookingAction:126 - The INSERT statement conflicted with the FOREIGN KEY constraint "FK_tblBooking_tblPromotionCode". The conflict occurred in database "ZTourist", table "dbo.tblCouponCode", column 'Code'.
+2019-03-29 20:46:51 ERROR ConfirmBookingAction:126 - Cannot insert the value NULL into column 'ID', table 'ZTourist.dbo.tblBooking'; column does not allow nulls. INSERT fails.
+2019-03-29 20:48:34 ERROR ConfirmBookingAction:126 - The INSERT statement conflicted with the FOREIGN KEY constraint "FK_tblBooking_tblPromotionCode". The conflict occurred in database "ZTourist", table "dbo.tblCouponCode", column 'Code'.
+2019-03-29 20:57:26 ERROR ConfirmBookingAction:126 - The INSERT statement conflicted with the FOREIGN KEY constraint "FK_tblBooking_tblPromotionCode". The conflict occurred in database "ZTourist", table "dbo.tblCouponCode", column 'Code'.
+2019-03-29 21:03:01 ERROR ViewCartAction:71 - null

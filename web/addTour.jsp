@@ -556,7 +556,7 @@
                 });
                 
                 var u = $('#id').val();
-                $('#id').change(function () {
+                $('#id').keyup(function () {
                     if (u.toString().toLowerCase() === $('#id').val().toString().toLowerCase()) {
                         $('#idV > .errorMessage').show();
                     } else {
@@ -613,13 +613,13 @@
                                 },
                                 minGuest: {
                                     required: true,
-                                    number: true,
+                                    digits: true,
                                     range: [0, 100],
                                     le: "#maxGuest"
                                 },
                                 maxGuest: {
                                     required: true,
-                                    number: true,
+                                    digits: true,
                                     range: [1, 100],
                                     ge: "#minGuest"
                                 },
@@ -665,13 +665,13 @@
                                 },
                                 minGuest: {
                                     required: "Please enter minimum guest of this tour",
-                                    number: "Minimum guest must be a number",
+                                    digits: "Minimum guest must be digits",
                                     range: "Minimum guest must be in range from 0 to 100",
                                     le: "Minimum guest must be lesser or equals to maximum guest"
                                 },
                                 maxGuest: {
                                     required: "Please enter maximum guest of this tour",
-                                    number: "Maximum guest must be a number",
+                                    digits: "Maximum guest must be digits",
                                     range: "Maximmum guest must be in range from 1 to 100",
                                     ge: "Maximum guest must be greater or equals to minimum guest"
                                 },

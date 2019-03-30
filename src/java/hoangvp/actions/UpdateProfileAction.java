@@ -39,7 +39,7 @@ public class UpdateProfileAction extends ActionSupport implements ServletRequest
     public String execute() {
         try {
             String username = session.get("USER") + "";
-            if (photo != null) { //neu avatar khong bi thay doi
+            if (photo != null) { //neu avatar bi thay doi
                 String path = servletRequest.getRealPath("/").concat("images/avatars/" + username.toLowerCase());
                 FileUtils.copyFile(new File(photo), new File(path, photoFileName), true);
                 avatar = "images/avatars/" + username.toLowerCase() + "/" + photoFileName;

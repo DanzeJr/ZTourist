@@ -5,15 +5,7 @@
 <struts>
     <!-- Configuration for the default package. -->
     <constant name="struts.ui.theme" value="simple"/>
-    <package name="default" extends="struts-default">
-        <interceptors>
-            <interceptor name="guestAuth" class="hoangvp.interceptors.GuestAuthenticationInterceptor"></interceptor>
-             <interceptor-stack name="guestStack">
-                <interceptor-ref name="guestAuth" />
-                <interceptor-ref name="defaultStack" />
-            </interceptor-stack>
-        </interceptors>
-        
+    <package name="default" extends="struts-default">        
         
         <action name="">
             <result>index.jsp</result>
@@ -49,6 +41,10 @@
             <result name="success">editProfile.jsp</result>
         </action>
         <action name="updateProfile" class="hoangvp.actions.UpdateProfileAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/png,image/jpeg</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
             <result name="input">editProfile.jsp</result>
             <result name="success">dashboard.jsp</result>
         </action>
@@ -87,6 +83,13 @@
             <result name="input">payment.jsp</result>
             <result name="success">paymentResult.jsp</result>
         </action>
+        <action name="viewAllDestinations" class="hoangvp.actions.ViewAllDestinationsAction">
+            <result name="success">destination.jsp</result>
+        </action>
+        <action name="viewAllTours" class="hoangvp.actions.ViewAllToursAction">
+            <result name="success">tour.jsp</result>
+        </action>
+        
         
         <action name="signInStaff" class="hoangvp.actions.SignInStaffAction">
             <result name="login">loginStaff.jsp</result>
@@ -102,6 +105,10 @@
             <result name="success">destinationStaff.jsp</result>
         </action>
         <action name="addDestination" class="hoangvp.actions.AddDestinationAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/png,image/jpeg</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
             <result name="input">addDestination.jsp</result>
             <result name="success" type="redirectAction">viewAllDestinationsStaff</result>
         </action>
@@ -109,7 +116,51 @@
             <result name="success">tourStaff.jsp</result>
         </action>
         <action name="addTour" class="hoangvp.actions.AddTourAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/png,image/jpeg</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
             <result name="input">addTour.jsp</result>
+            <result name="success" type="redirectAction">viewAllToursStaff</result>
+        </action>
+        <action name="addStaff" class="hoangvp.actions.AddStaffAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/png,image/jpeg</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+            <result name="input">addStaff.jsp</result>
+            <result name="success" type="redirectAction">viewAllStaffs</result>
+        </action>
+        <action name="viewAllStaffs" class="hoangvp.actions.ViewAllStaffsAction">
+            <result name="success">staff.jsp</result>
+        </action>
+        <action name="viewStaffProfile" class="hoangvp.actions.ViewStaffProfileAction">
+            <result name="error">accessdenied.jsp</result>
+            <result name="success">staffProfile.jsp</result>
+        </action>
+        <action name="editStaffProfile" class="hoangvp.actions.ViewStaffProfileAction">
+            <result name="error">accessdenied.jsp</result>
+            <result name="success">editStaffProfile.jsp</result>
+        </action>
+        <action name="updateStaffProfile" class="hoangvp.actions.UpdateStaffProfileAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/png,image/jpeg</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+            <result name="error">accessdenied.jsp</result>
+            <result name="input">editStaffProfile.jsp</result>
+            <result name="success">staffProfile.jsp</result>
+        </action>
+        <action name="editTour" class="hoangvp.actions.ViewTourDetailsStaffAction">
+            <result name="error">accessdenied.jsp</result>
+            <result name="success">editTour.jsp</result>
+        </action>
+        <action name="updateTour" class="hoangvp.actions.UpdateTourAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/png,image/jpeg</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+            <result name="input">editTour.jsp</result>
             <result name="success" type="redirectAction">viewAllToursStaff</result>
         </action>
     </package>

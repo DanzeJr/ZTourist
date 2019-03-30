@@ -64,6 +64,12 @@ public class AuthFilter implements Filter {
         guest.add("tourBooking.jsp");
         guest.add("addToCart");
         guest.add("addToCart.action");
+        guest.add("destination.jsp");
+        guest.add("viewAllDestinations");
+        guest.add("viewAllDestinations.action");
+        guest.add("tour.jsp");
+        guest.add("viewAllTours");
+        guest.add("viewAllTours.action");
 
         //CUSTOMER
         customer = new ArrayList<>();
@@ -105,6 +111,12 @@ public class AuthFilter implements Filter {
         customer.add("paymentResult.jsp");
         customer.add("confirmBooking");
         customer.add("confirmBooking.action");
+        customer.add("destination.jsp");
+        customer.add("viewAllDestinations");
+        customer.add("viewAllDestinations.action");
+        customer.add("tour.jsp");
+        customer.add("viewAllTours");
+        customer.add("viewAllTours.action");
 
         //GUIDE
         guide = new ArrayList<>();
@@ -143,6 +155,25 @@ public class AuthFilter implements Filter {
         admin.add("tourStaff.jsp");
         admin.add("viewAllToursStaff");
         admin.add("viewAllToursStaff.action");
+        admin.add("addStaff.jsp");
+        admin.add("addStaff");
+        admin.add("addStaff.action");
+        admin.add("staff.jsp");
+        admin.add("viewAllStaffs");
+        admin.add("viewAllStaffs.action");
+        admin.add("staffProfile.jsp");
+        admin.add("viewStaffProfile");
+        admin.add("viewStaffProfile.action");
+        admin.add("editStaffProfile.jsp");
+        admin.add("editStaffProfile");
+        admin.add("editStaffProfile.action");
+        admin.add("updateStaffProfile");
+        admin.add("updateStaffProfile.action");
+        admin.add("editTour.jsp");
+        admin.add("editTour");
+        admin.add("editTour.action");
+        admin.add("updateTour");
+        admin.add("updateTour.action");
 
     }
 

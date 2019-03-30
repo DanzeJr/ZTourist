@@ -22,17 +22,17 @@
 *************************************-->
 <nav id="menu">
     <ul>
-        <li><s:a href="index.jsp">Home</s:a></li>
-        <li><a href="destinations.html">Destinations</a></li>
-        <li><a href="javascript:void(0);">Tour Packages</a>
+        <li><s:a href="''">Home</s:a></li>
+        <li><s:a href="viewAllDestinations">Destinations</s:a>
+        <li><s:a href="viewAllTours">tour packages</s:a>
             <div>
-                <ul>
+                <%--<ul>
                     <li><a href="vietnameTour.jsp">Vietnam Tour</a></li>
                     <li><a href="skoreaTour.jsp">South Korea Tour</a></li>
                     <li><a href="japanTour.jsp">Japan Tour</a></li>
                     <li><a href="chinaTour.jsp">China Tour</a></li>
                     <li><a href="singaporeTour.jsp">Singapore Tour</a></li>
-                </ul>
+                </ul>--%>
                 <div class="tg-sliderarea">
                     <h2>Popular Tours</h2>
                     <div class="tg-trendingtripsslider tg-trendingtrips owl-carousel">
@@ -63,15 +63,13 @@
             </div>
         </li>
         <li><a href="javascript:void(0);">Pages</a>
-            <ul>
-                <li><a href="faqs.html">FAQ’s</a></li>
-                <li><a href="packages.html">Table</a></li>
-                <li><a href="aboutus.html">About Us</a></li>
-                <li><a href="contactus.html">Contact us</a></li>
-                <li><a href="billingdetail.html">Billing Detail</a></li>
+            <ul>                
                 <s:if test="%{#session.ROLE == null}">
                     <li><a href="loginStaff.jsp">For Staff Only</a></li>
                 </s:if>
+                <s:else>
+                    <li><s:a href="viewOrderHistory">Order History</s:a></li>
+                </s:else>
             </ul>
         </li>
     </ul>
@@ -89,7 +87,7 @@
     <header id="tg-header" class="tg-header tg-headervtwo tg-headerfixed tg-haslayout">
         <div class="container-fluid">
             <div class="row">
-                <strong class="tg-logo"><a href="index.html"><img src="images/dbzlogo.png" alt="company logo here"></a></strong>
+                <strong class="tg-logo"><s:a href="''"><img src="images/dbzlogo.png" alt="company logo here"></s:a></strong>
                 <nav class="tg-infonav" style="padding: 0;">
                     <ul>
                         <s:if test="%{#session.ROLE == null || #session.ROLE != 'customer'}">
@@ -157,18 +155,18 @@
                             </div>
                             <div id="tg-navigation" class="collapse navbar-collapse tg-navigation">
                                 <ul>
-                                    <li class="menu-item-has-children"><a href="javascript:void(0);">Home</a>
+                                    <li class="menu-item-has-children"><s:a href="''">Home</s:a>
                                     </li>
-                                    <li><a href="destinations.html">destinations</a></li>
-                                    <li class="menu-item-has-children menu-item-has-mega-menu"><a href="javascript:void(0);">tour packages</a>
+                                    <li><s:a href="viewAllDestinations">destinations</s:a></li>
+                                    <li class="menu-item-has-children menu-item-has-mega-menu"><s:a href="viewAllTours">tour packages</s:a>
                                         <div class="mega-menu">
-                                            <ul>
+                                            <%--<ul>
                                                 <li><a href="vietnameTour.jsp">Vietnam Tour</a></li>
                                                 <li><a href="skoreaTour.jsp">South Korea Tour</a></li>
                                                 <li><a href="japanTour.jsp">Japan Tour</a></li>
                                                 <li><a href="chinaTour.jsp">China Tour</a></li>
                                                 <li><a href="singaporeTour.jsp">Singapore Tour</a></li>
-                                            </ul>
+                                            </ul>--%>
                                             <div class="tg-sliderarea">
                                                 <h2>Popular Tours</h2>
                                                 <div class="tg-trendingtripsslider tg-trendingtrips owl-carousel">                                                            
@@ -200,14 +198,12 @@
                                     </li>
                                     <li class="menu-item-has-children"><a href="javascript:void(0);">pages</a>
                                         <ul class="sub-menu">
-                                            <li><a href="faqs.html">FAQ’s</a></li>
-                                            <li><a href="packages.html">Table</a></li>
-                                            <li><a href="aboutus.html">About Us</a></li>
-                                            <li><a href="contactus.html">Contact us</a></li>
-                                            <li><a href="billingdetail.html">Billing Detail</a></li>
                                             <s:if test="%{#session.ROLE == null}">
                                                 <li><a href="loginStaff.jsp">For Staff Only</a></li>
                                             </s:if>
+                                            <s:else>
+                                                <li><s:a href="viewOrderHistory">Order History</s:a></li>
+                                            </s:else>
                                         </ul>
                                     </li>
                                 </ul>

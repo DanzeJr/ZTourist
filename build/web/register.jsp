@@ -154,7 +154,7 @@
                                 <s:password name="password" cssClass="form-control" id="Password" placeholder="Password" required="true"/>
                             </div>
 
-                            <a class="forgot" href="#">Forgot password?</a>
+                            <%--<a class="forgot" href="#">Forgot password?</a>--%>
 
                             <button type="submit" class="regbtn">Sign In</button>
                         </s:form>
@@ -254,7 +254,7 @@
                         },
                         messages: {
                             username: {
-                                required: "Please enter your user name",
+                                required: "Please enter your username",
                                 rangelength: "Username must be 4 to 30 characters long"
                             },
                             lastName: {

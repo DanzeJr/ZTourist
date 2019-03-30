@@ -9,24 +9,21 @@ import com.opensymphony.xwork2.ActionSupport;
 import hoangvp.daos.PlaceDAO;
 import hoangvp.dtos.PlaceDTO;
 import java.io.File;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.struts2.interceptor.ServletRequestAware;
-import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *
  * @author Danze
  */
-public class AddDestinationAction extends ActionSupport implements ServletRequestAware, SessionAware{
+public class AddDestinationAction extends ActionSupport implements ServletRequestAware{
     
     private static Logger logger = LogManager.getLogger(AddDestinationAction.class.getName());
     
     private String id, name, des, country, photo, photoFileName, titleImage;
-    private Map<String, Object> session;
     private HttpServletRequest servletRequest;
     
     public AddDestinationAction() {
@@ -35,14 +32,16 @@ public class AddDestinationAction extends ActionSupport implements ServletReques
     @Override
     public String execute() {
         try {
+            if (id == null || titleImage == null)
+                return INPUT;
             PlaceDAO dao = new PlaceDAO();
             if (dao.isExistedID(id)) {
                 addFieldError("id", "Destination ID is existed!");
                 return INPUT;
             }
-            if (photo == null) {
+            if (photo == null && titleImage.isEmpty()) {
                 titleImage = "images/places/default.jpg";
-            } else {
+            } else if (photo != null) {
                 String path = servletRequest.getRealPath("/").concat("images/places/" + id.toLowerCase());
                 FileUtils.copyFile(new File(photo), new File(path, photoFileName), true);
                 titleImage = "images/places/" + id.toLowerCase() + "/" + photoFileName;
@@ -57,11 +56,6 @@ public class AddDestinationAction extends ActionSupport implements ServletReques
         }
         return SUCCESS;
     }   
-    
-    @Override
-    public void setSession(Map<String, Object> map) {
-        this.session = map;
-    }
 
     @Override
     public void setServletRequest(HttpServletRequest hsr) {

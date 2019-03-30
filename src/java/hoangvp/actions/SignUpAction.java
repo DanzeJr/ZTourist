@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class SignUpAction extends ActionSupport {
 
-    private static Logger logger = LogManager.getLogger(SearchTourAction.class.getName());
+    private static Logger logger = LogManager.getLogger(SignUpAction.class.getName());
 
     private String username, email, password, gender, firstName, lastName, address, phone, birthDate, reg = "Sign Up";
 

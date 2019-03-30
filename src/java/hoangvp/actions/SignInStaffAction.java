@@ -33,7 +33,7 @@ public class SignInStaffAction extends ActionSupport implements SessionAware{
             String role = dao.checkLogin(username, password);
             if (role.equals("admin") || role.equals("guide")) {
                 session.put("ROLE", role);
-                session.put("USER", username);
+                session.put("USER", username.toLowerCase());
                 String avatar = dao.getAvatar(username);
                 session.put("AVA", avatar);
             } else {

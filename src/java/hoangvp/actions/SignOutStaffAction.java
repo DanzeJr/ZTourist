@@ -10,15 +10,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 
 /**
  *
  * @author Danze
  */
-public class SignOutStaffAction extends ActionSupport implements SessionAware, ServletResponseAware {
+public class SignOutStaffAction extends ActionSupport implements SessionAware {
 
     private static Logger logger = LogManager.getLogger(SignOutStaffAction.class.getName());
 
@@ -33,12 +31,7 @@ public class SignOutStaffAction extends ActionSupport implements SessionAware, S
         try {
             session.remove("ROLE");
             session.remove("USER");
-            session.remove("AVA");
-            session.remove("CART");
-            response = ServletActionContext.getResponse();
-            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
-            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-            response.setDateHeader("Expires", 0); // Proxies.        
+            session.remove("AVA");      
         } catch (Exception e) {
             logger.error(e.getMessage());
         }
@@ -48,11 +41,6 @@ public class SignOutStaffAction extends ActionSupport implements SessionAware, S
     @Override
     public void setSession(Map<String, Object> map) {
         this.session = map;
-    }
-
-    @Override
-    public void setServletResponse(HttpServletResponse hsr) {
-        this.response = hsr;
     }
 
 }

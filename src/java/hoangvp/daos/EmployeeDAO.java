@@ -14,7 +14,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -32,6 +35,58 @@ public class EmployeeDAO implements Serializable{
             pre.close();
         if (conn != null)
             conn.close();
+    }
+    
+    public int getTotalStaffs() throws Exception {
+        int total = 0;
+        
+        try {
+            conn = MyConnection.getConnection();
+            String sql = "SELECT COUNT(Username) AS Total"
+                    + " FROM tblEmployee";          
+            pre = conn.prepareStatement(sql);
+            rs = pre.executeQuery();
+            if (rs.next()) {
+                total = rs.getInt("Total");
+            }
+        } finally {
+            closeConnection();
+        }
+        return total;
+    }
+    
+    public List<EmployeeDTO> getAllStaffs(int skip, int fetch) throws Exception {
+        List<EmployeeDTO> result = null;
+        EmployeeDTO dto;
+        String username, firstName, lastName, gender, avatar, role, startDate;
+        
+        try {
+            conn = MyConnection.getConnection();
+            String sql = "SELECT Username, FirstName, LastName, Gender, Avatar, StartDate, Role"
+                    + " FROM tblEmployee"
+                    + " ORDER BY FirstName, LastName"
+                    + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+            
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, skip);
+            pre.setInt(2, fetch);
+            rs = pre.executeQuery();
+            result = new ArrayList<>();
+            while (rs.next()) {
+                username = rs.getString("Username");
+                firstName = rs.getString("FirstName");
+                lastName = rs.getString("LastName");
+                gender = rs.getString("Gender");
+                avatar = rs.getString("Avatar");
+                startDate = rs.getTimestamp("StartDate").toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy/MMM/dd"));
+                role = rs.getString("Role");
+                dto = new EmployeeDTO(avatar, username, firstName, lastName, gender, startDate, role);
+                result.add(dto);
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
     }
     
     public HashMap<String, String> getGuideIdName() throws Exception {
@@ -114,7 +169,7 @@ public class EmployeeDAO implements Serializable{
         EmployeeDTO dto = null;
         
         try {
-            String sql = "SELECT Avatar, FirstName, LastName, Email, Phone, Address, Gender, BirthDate, Job FROM tblEmployee WHERE Username = ?";
+            String sql = "SELECT Avatar, FirstName, LastName, Email, Phone, Address, Gender, BirthDate, Job, Language, StartDate, Salary, Role FROM tblEmployee WHERE Username = ?";
             conn = MyConnection.getConnection();
             pre = conn.prepareStatement(sql);
             pre.setString(1, username);
@@ -129,9 +184,17 @@ public class EmployeeDAO implements Serializable{
                 String gender = rs.getString("Gender");
                 Date birthDate = rs.getDate("BirthDate");
                 String job = rs.getString("Job");
+                String lang = rs.getString("Language");
+                Timestamp startDate = rs.getTimestamp("StartDate");
+                float salary = rs.getFloat("Salary");
+                String role = rs.getString("Role");
                 dto = new EmployeeDTO(firstName, lastName, gender, address, email, phone, birthDate);
                 dto.setAvatar(avatar);
                 dto.setJob(job);
+                dto.setLanguage(lang);
+                dto.setStartDate(startDate);
+                dto.setSalary(salary);
+                dto.setRole(role);
             }
         } finally {
             closeConnection();
@@ -161,8 +224,8 @@ public class EmployeeDAO implements Serializable{
         boolean check = false;
         
         try {
-            String sql = "INSERT INTO tblEmployee(Username, Password, FirstName, LastName, Gender, Avatar, Address, Email, Phone, BirthDate, Job, StartDate, Salary, Role)"
-                    + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO tblEmployee(Username, Password, FirstName, LastName, Gender, Avatar, Address, Email, Phone, BirthDate, StartDate, Salary, Role)"
+                    + " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
             conn = MyConnection.getConnection();
             pre = conn.prepareStatement(sql);
             pre.setString(1, dto.getUsername());
@@ -175,10 +238,9 @@ public class EmployeeDAO implements Serializable{
             pre.setString(8, dto.getEmail());            
             pre.setString(9, dto.getPhone());
             pre.setDate(10, dto.getBirthDate());
-            pre.setString(11, dto.getJob());
-            pre.setTimestamp(12, Timestamp.valueOf(LocalDateTime.now()));
-            pre.setFloat(13, dto.getSalary());
-            pre.setString(14, dto.getRole());
+            pre.setTimestamp(11, Timestamp.valueOf(LocalDateTime.now()));
+            pre.setFloat(12, 0);
+            pre.setString(13, dto.getRole());
             check = pre.executeUpdate() > 0;
         } finally {
             closeConnection();
@@ -190,10 +252,10 @@ public class EmployeeDAO implements Serializable{
         boolean check = false;
         
         try {
-            String sql = "UPDATE tblEmployee SET Email = ?, FirstName = ?, LastName = ?, Gender = ?, Phone = ?, Address = ?, BirthDate = ?, Job = ?, Avatar = ? WHERE Username = ?";
+            String sql = "UPDATE tblEmployee SET Email = ?, FirstName = ?, LastName = ?, Gender = ?, Phone = ?, Address = ?, BirthDate = ?, Role = ?, Language = ?, Job = ?, Salary = ?, Avatar = ? WHERE Username = ?";
             conn = MyConnection.getConnection();
-            if (dto.getAvatar() == null) {
-                sql = sql.replace(", Avatar = ?", "");
+            if (dto.getRole() == null) {
+                sql = sql.replace(", Role = ?", "");
             }
             pre = conn.prepareStatement(sql);
             int i = 0;
@@ -204,9 +266,13 @@ public class EmployeeDAO implements Serializable{
             pre.setString(++i, dto.getPhone());
             pre.setString(++i, dto.getAddress());
             pre.setDate(++i, dto.getBirthDate());
+            if (dto.getRole() != null) {                
+                pre.setString(++i, dto.getRole());
+            }
+            pre.setString(++i, dto.getLanguage());
             pre.setString(++i, dto.getJob());
-            if (dto.getAvatar() != null)
-                pre.setString(++i, dto.getAvatar());
+            pre.setFloat(++i, dto.getSalary());
+            pre.setString(++i, dto.getAvatar());
             pre.setString(++i, dto.getUsername());
             check = pre.executeUpdate() > 0;
         } finally {

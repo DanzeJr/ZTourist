@@ -37,6 +37,8 @@ public class AddTourAction extends ActionSupport implements ServletRequestAware{
     @Override
     public String execute() {
         try {
+            if (id == null || titleImage == null)
+                return INPUT;
             TourDAO dao = new TourDAO();
             boolean valid = true;
             if (dao.isExistedID(id)) {
@@ -70,9 +72,9 @@ public class AddTourAction extends ActionSupport implements ServletRequestAware{
             if (valid == false) {
                 return INPUT;
             }
-            if (photo == null) {
+            if (photo == null && titleImage.isEmpty()) {
                 titleImage = "images/tours/default.jpg";
-            } else {
+            } else if (photo != null) {
                 String path = servletRequest.getRealPath("/").concat("images/tours/" + id.toLowerCase());
                 FileUtils.copyFile(new File(photo), new File(path, photoFileName), true);
                 titleImage = "images/tours/" + id.toLowerCase() + "/" + photoFileName;
@@ -119,7 +121,7 @@ public class AddTourAction extends ActionSupport implements ServletRequestAware{
                         checkGuide = false;
                     }
                 }
-                if (checkDest == false) {
+                if (checkGuide == false) {
                     addActionError("An error occurs when adding tour guides! Please try later!");
                 }
                 if (checkDest == false || checkGuide == false)

@@ -119,7 +119,7 @@
                                     <div class="form-group">
                                         <div class="tg-checkbox">
                                         </div>
-                                        <span><a href="#">Lost your password?</a></span>
+                                        <%--<span><a href="#">Lost your password?</a></span>--%>
                                     </div>
                                     <button class="tg-btn tg-btn-lg" type="submit" name="action"><span>Sign In</span></button>
                                 </fieldset>

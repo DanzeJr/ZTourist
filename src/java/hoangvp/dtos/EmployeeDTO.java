@@ -7,17 +7,18 @@ package hoangvp.dtos;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
  * @author Danze
  */
 public class EmployeeDTO implements Serializable{
-    private String avatar, username, password, firstName, lastName, gender, address, email, phone;
+    private String avatar, username, password, firstName, lastName, gender, address, email, phone, startDateStr;
     private String job, language, role;
-    private Date birthDate, startDate;
+    private Date birthDate;
+    private Timestamp startDate;
     private float salary;
-    private int rating;
 
     public EmployeeDTO() {
     }
@@ -32,6 +33,16 @@ public class EmployeeDTO implements Serializable{
         this.birthDate = birthDate;
     }
 
+    public EmployeeDTO(String avatar, String username, String firstName, String lastName, String gender, String startDateStr, String role) {
+        this.avatar = avatar;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.startDateStr = startDateStr;
+        this.role = role;
+    }
+    
     public String getAvatar() {
         return avatar;
     }
@@ -136,11 +147,11 @@ public class EmployeeDTO implements Serializable{
         this.birthDate = birthDate;
     }
 
-    public Date getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
 
@@ -152,12 +163,12 @@ public class EmployeeDTO implements Serializable{
         this.salary = salary;
     }
 
-    public int getRating() {
-        return rating;
+    public String getStartDateStr() {
+        return startDateStr;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setStartDateStr(String startDateStr) {
+        this.startDateStr = startDateStr;
     }
             
 }

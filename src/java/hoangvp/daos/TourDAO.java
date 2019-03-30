@@ -89,6 +89,40 @@ public class TourDAO implements Serializable{
         return dto;
     }
     
+    public TourDTO getTourDetailsByIDStaff(String id) throws Exception {
+        TourDTO dto = null;
+        String name, des, transport, titleImg, status;
+        Timestamp fromDate, toDate;
+        float fareAdult, fareKid;
+        int minGuest, maxGuest;
+        
+        try {
+            String sql = "SELECT Name, Description, FromDate, ToDate, FareAdult, FareKid, Transport, MinGuest, MaxGuest, TitleImage, Status FROM tblTour WHERE ID = ? AND Status = 'Active'";
+            conn = MyConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, id);
+            rs = pre.executeQuery();            
+            if (rs.next()) {
+                name = rs.getString("Name");
+                des = rs.getString("Description");
+                titleImg = rs.getString("TitleImage");
+                fromDate = rs.getTimestamp("FromDate");
+                toDate = rs.getTimestamp("ToDate");
+                fareAdult = rs.getFloat("FareAdult");
+                fareKid = rs.getFloat("FareKid");
+                transport = rs.getString("Transport");
+                minGuest = rs.getInt("MinGuest");
+                maxGuest = rs.getInt("MaxGuest");
+                status = rs.getString("Status");
+                dto = new TourDTO(name, des, transport, titleImg, fareAdult, fareKid, fromDate, toDate, minGuest, maxGuest);
+                dto.setStatus(status);
+            }
+        } finally {
+            closeConnection();
+        }
+        return dto;
+    }
+    
     public TourDTO getTourCartByID(String id) throws Exception {
         TourDTO dto = null;
         String name, titleImg;
@@ -628,6 +662,24 @@ public class TourDAO implements Serializable{
         return result;
     }
     
+    public boolean hasNotBooking(String tourID) throws Exception {
+        boolean check = true;
+        
+        try {
+            String sql = "SELECT TourID FROM tblBookingDetail WHERE TourID = ?";
+            conn = MyConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, tourID);
+            rs = pre.executeQuery();
+            if (rs.next()) {
+                check = false;
+            }
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+    
     public boolean insertTourPlace(String tourID, String placeID, int number) throws Exception {
         boolean check = false;
         
@@ -639,6 +691,21 @@ public class TourDAO implements Serializable{
             pre.setString(1, tourID);
             pre.setString(2, placeID);
             pre.setInt(3, number);
+            check = pre.executeUpdate() > 0;
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+    
+    public boolean deleteTourPlaces(String tourID) throws Exception {
+        boolean check = false;
+        
+        try {
+            String sql = "DELETE FROM tblTourDetail WHERE TourID = ?";
+            conn = MyConnection.getConnection();
+            pre = conn.prepareStatement(sql);            
+            pre.setString(1, tourID);
             check = pre.executeUpdate() > 0;
         } finally {
             closeConnection();
@@ -663,6 +730,101 @@ public class TourDAO implements Serializable{
             closeConnection();
         }
         return check;
+    }
+    
+    public boolean deactivateTourGuides(String tourID) throws Exception {
+        boolean check = false;
+        
+        try {
+            String sql = "UPDATE tblTourGuide SET Status = 'Deactive' WHERE TourID = ?";
+            conn = MyConnection.getConnection();
+            pre = conn.prepareStatement(sql);            
+            pre.setString(1, tourID);
+            check = pre.executeUpdate() > 0;
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+    
+    public boolean updateTourGuides(String tourID, String username) throws Exception {
+        boolean check = false;
+        
+        try {
+            String sql = "UPDATE tblTourGuide SET AssignDate = ?, Status = 'Active' WHERE TourID = ? AND EmployeeID = ?";
+            conn = MyConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
+            pre.setString(2, tourID);
+            pre.setString(3, username);
+            check = pre.executeUpdate() > 0;
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
+    
+    public List<String> getAllTourGuides(String tourID) throws Exception {
+        List<String> result = null;
+        String username;
+        
+        try {
+            String sql = "SELECT EmployeeID FROM tblTourGuide WHERE TourID = ?";
+            conn = MyConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, tourID);
+            rs = pre.executeQuery();
+            result = new ArrayList<>();
+            while (rs.next()) {
+                username = rs.getString("EmployeeID");
+                result.add(username);
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
+    }
+    
+    public List<String> getActiveTourGuides(String tourID) throws Exception {
+        List<String> result = null;
+        String username;
+        
+        try {
+            String sql = "SELECT EmployeeID FROM tblTourGuide WHERE TourID = ? AND Status = 'Active'";
+            conn = MyConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, tourID);
+            rs = pre.executeQuery();
+            result = new ArrayList<>();
+            while (rs.next()) {
+                username = rs.getString("EmployeeID");
+                result.add(username);
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
+    }
+    
+    public List<String> getAllTourPlaces(String tourID) throws Exception {
+        List<String> result = null;
+        String placeID;
+        
+        try {
+            String sql = "SELECT PlaceID FROM tblTourDetail WHERE TourID = ? ORDER BY Number";
+            conn = MyConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, tourID);
+            rs = pre.executeQuery();
+            result = new ArrayList<>();
+            while (rs.next()) {
+                placeID = rs.getString("PlaceID");
+                result.add(placeID);
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
     }
     
     public boolean insert(TourDTO dto) throws Exception {
@@ -697,24 +859,27 @@ public class TourDAO implements Serializable{
         
         try {
             String sql = "UPDATE tblTour"
-                    + " SET Name = ?, Description = ?, FromDate = ?, ToDate = ?, FareAdutl = ?, FareKid = ?, Transport = ?, MinGuest = ?, MaxGuest = ?, TitleImage = ?"
+                    + " SET Name = ?, Description = ?, Transport = ?, TitleImage = ?, FromDate = ?, ToDate = ?, FareAdult = ?, FareKid = ?, MinGuest = ?, MaxGuest = ?, Status = ?"
                     + " WHERE ID = ?";
             conn = MyConnection.getConnection();
-            if (dto.getDesc().isEmpty()) {
-                sql = sql.replace(", Description = ?", "");
+            if (dto.getFareAdult() < 0) {
+                sql = sql.replace(", FromDate = ?, ToDate = ?, FareAdult = ?, FareKid = ?, MinGuest = ?, MaxGuest = ?, Status = ?", "");
             }
             pre = conn.prepareStatement(sql);
             int i = 0;
             pre.setString(++i, dto.getName());
-            if (!dto.getDesc().isEmpty())
-                pre.setString(++i, dto.getDesc());
-            pre.setTimestamp(++i, dto.getFromDateTime());
-            pre.setTimestamp(++i, dto.getToDateTime());
-            pre.setFloat(++i, dto.getFareAdult());
-            pre.setFloat(++i, dto.getFareKid());
+            pre.setString(++i, dto.getDesc());            
             pre.setString(++i, dto.getTransport());
-            pre.setInt(++i, dto.getMinGuest());
-            pre.setInt(++i, dto.getMaxGuest());
+            pre.setString(++i, dto.getTitleImage());
+            if (dto.getFareAdult() > 0) {
+                pre.setTimestamp(++i, dto.getFromDateTime());
+                pre.setTimestamp(++i, dto.getToDateTime());
+                pre.setFloat(++i, dto.getFareAdult());
+                pre.setFloat(++i, dto.getFareKid());                
+                pre.setInt(++i, dto.getMinGuest());
+                pre.setInt(++i, dto.getMaxGuest());
+                pre.setString(++i, dto.getStatus());
+            }
             pre.setString(++i, dto.getId());
             check = pre.executeUpdate() > 0;
         } finally {

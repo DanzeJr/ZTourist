@@ -1,0 +1,2 @@
+cscript “C:\Program Files\Microsoft Office\Office16\OSPP.VBS” /dstatus
+cscript “C:\Program Files\Microsoft Office\Office16\OSPP.VBS” /unpkey:

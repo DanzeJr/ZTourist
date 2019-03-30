@@ -2,23 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/dtos/BookingDTO.java</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/dtos/TourDTO.java</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/web/index.jsp</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/actions/UpdateCartAction.java</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/actions/ConfirmBookingAction.java</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/web/tourBooking.jsp</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/filters/AuthFilter.java</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/web/dashboard.jsp</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/struts.xml</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/web/cart.jsp</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/web/paymentResult.jsp</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/daos/TourDAO.java</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/web/payment.jsp</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/actions/ViewProfileAction.java</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/daos/BookingDAO.java</file>
-            <file>file:/C:/Users/Hoang/Desktop/FPT/PRJ321/ZTourist/src/java/hoangvp/actions/CheckOutAction.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -194,6 +194,9 @@
                             email: {
                                 required: true,
                                 email: true
+                            },
+                            job: {
+                                maxlength: 100
                             }
                         },
                         messages: {
@@ -220,6 +223,9 @@
                             email: {
                                 required: "Please enter your email",
                                 email: "Invalid email"
+                            },
+                            job: {
+                                maxlength: "Job must not be greater than 100 characters long"
                             }
                         }
                     });

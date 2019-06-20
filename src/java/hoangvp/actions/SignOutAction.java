@@ -32,7 +32,11 @@ public class SignOutAction extends ActionSupport implements SessionAware {
             session.remove("ROLE");
             session.remove("USER");
             session.remove("AVA");
-            session.remove("CART");    
+            session.remove("CART");
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+            response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+            response.setDateHeader("Expires", 0); // Proxies.
+
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

@@ -283,7 +283,7 @@
                         },
                         password: {
                             required: "Please provide a password",
-                            rangelength: "Phone number must be from 6 to 30 characters long"
+                            rangelength: "Password must be from 6 to 30 characters long"
                         },
                         email: {
                             required: "Please enter your email",

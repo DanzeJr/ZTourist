@@ -245,6 +245,10 @@ public class AuthFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        
+        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        res.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        res.setDateHeader("Expires", 0); // Proxies.
 
         String uri = req.getRequestURI();
         boolean isRef = uri.contains("/images/") || uri.contains("/css/") || uri.contains("/js/") || uri.contains("/fonts/");

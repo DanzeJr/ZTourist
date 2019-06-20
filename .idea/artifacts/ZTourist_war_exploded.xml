@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ZTourist:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ZTourist_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ZTourist/web/Web" />
+      <element id="javaee-facet-resources" facet="ZTourist/web/Web2" />
+    </root>
+  </artifact>
+</component>

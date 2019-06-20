@@ -1,0 +1,167 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!-- Configuration for the default package. -->
+    <constant name="struts.ui.theme" value="simple"/>
+    <package name="default" extends="struts-default">        
+        
+        <action name="">
+            <result>index.jsp</result>
+        </action>
+        <action name="init" class="hoangvp.actions.InitNavAction">
+            <result name="success">index.jsp</result>
+        </action>
+        <action name="initStaff" class="hoangvp.actions.InitStaffAction">
+            <result name="success">homeStaff.jsp</result>
+        </action>
+        <action name="initCart" class="hoangvp.actions.InitCartAction">
+            <result name="success">index.jsp</result>
+        </action>
+        
+        <action name="searchTour" class="hoangvp.actions.SearchTourAction">
+            <result name="success">searchTour.jsp</result>
+        </action>
+        <action name="signIn" class="hoangvp.actions.SignInAction">
+            <result name="login">register.jsp</result>
+            <result name="success">index.jsp</result>
+        </action>
+        <action name="signOut" class="hoangvp.actions.SignOutAction">
+            <result name="success">index.jsp</result>
+        </action>
+        <action name="signUp_*" class="hoangvp.actions.SignUpAction" method="{1}">
+            <result name="input">register.jsp</result>
+            <result name="success">register.jsp</result>        
+        </action>
+        <action name="viewProfile" class="hoangvp.actions.ViewProfileAction">
+            <result name="success">dashboard.jsp</result>
+        </action>
+        <action name="editProfile" class="hoangvp.actions.ViewProfileAction">
+            <result name="success">editProfile.jsp</result>
+        </action>
+        <action name="updateProfile" class="hoangvp.actions.UpdateProfileAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/png,image/jpeg</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+            <result name="input">editProfile.jsp</result>
+            <result name="success">dashboard.jsp</result>
+        </action>
+        <action name="changePassword" class="hoangvp.actions.ChangePasswordAction">
+            <result name="input">changePassword.jsp</result>
+            <result name="success">changePassword.jsp</result>
+        </action>
+        <action name="viewTourDetails" class="hoangvp.actions.ViewTourDetailsAction">
+            <result name="error">404NotFound.jsp</result>
+            <result name="success">tourBooking.jsp</result>
+        </action>
+        <action name="viewCart" class="hoangvp.actions.ViewCartAction">
+            <result name="success">cart.jsp</result>
+        </action>
+        <action name="addToCart" class="hoangvp.actions.AddToCartAction">
+            <result name="login">register.jsp</result>
+            <result name="error">404NotFound.jsp</result>
+            <result name="input">tourBooking.jsp</result>
+            <result name="success" type="redirectAction">viewCart</result>
+        </action>
+        <action name="updateCart" class="hoangvp.actions.UpdateCartAction">
+            <result name="error">404NotFound.jsp</result>
+            <result name="success">cart.jsp</result>
+        </action>
+        <action name="removeTourInCart" class="hoangvp.actions.RemoveTourInCartAction">
+            <result name="error">404NotFound.jsp</result>
+            <result name="success" type="redirectAction">viewCart</result>
+        </action>
+        <action name="checkOut" class="hoangvp.actions.CheckOutAction">
+            <result name="error">404NotFound.jsp</result>
+            <result name="input">cart.jsp</result>
+            <result name="success">payment.jsp</result>
+        </action>
+        <action name="confirmBooking" class="hoangvp.actions.ConfirmBookingAction">
+            <result name="error">404NotFound.jsp</result>
+            <result name="input">payment.jsp</result>
+            <result name="success">paymentResult.jsp</result>
+        </action>
+        <action name="viewAllDestinations" class="hoangvp.actions.ViewAllDestinationsAction">
+            <result name="success">destination.jsp</result>
+        </action>
+        <action name="viewAllTours" class="hoangvp.actions.ViewAllToursAction">
+            <result name="success">tour.jsp</result>
+        </action>
+        
+        
+        <action name="signInStaff" class="hoangvp.actions.SignInStaffAction">
+            <result name="login">loginStaff.jsp</result>
+            <result name="success">homeStaff.jsp</result>
+        </action>
+        <action name="signOutStaff" class="hoangvp.actions.SignOutStaffAction">
+            <result name="success">loginStaff.jsp</result>
+        </action>
+        <action name="searchTourStaff" class="hoangvp.actions.SearchTourStaffAction">
+            <result name="success">searchTourStaff.jsp</result>
+        </action>
+        <action name="viewAllDestinationsStaff" class="hoangvp.actions.ViewAllDestinationsStaffAction">
+            <result name="success">destinationStaff.jsp</result>
+        </action>
+        <action name="addDestination" class="hoangvp.actions.AddDestinationAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/png,image/jpeg</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+            <result name="input">addDestination.jsp</result>
+            <result name="success" type="redirectAction">viewAllDestinationsStaff</result>
+        </action>
+        <action name="viewAllToursStaff" class="hoangvp.actions.ViewAllToursStaffAction">
+            <result name="success">tourStaff.jsp</result>
+        </action>
+        <action name="addTour" class="hoangvp.actions.AddTourAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/png,image/jpeg</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+            <result name="input">addTour.jsp</result>
+            <result name="success" type="redirectAction">viewAllToursStaff</result>
+        </action>
+        <action name="addStaff" class="hoangvp.actions.AddStaffAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/png,image/jpeg</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+            <result name="input">addStaff.jsp</result>
+            <result name="success" type="redirectAction">viewAllStaffs</result>
+        </action>
+        <action name="viewAllStaffs" class="hoangvp.actions.ViewAllStaffsAction">
+            <result name="success">staff.jsp</result>
+        </action>
+        <action name="viewStaffProfile" class="hoangvp.actions.ViewStaffProfileAction">
+            <result name="error">accessdenied.jsp</result>
+            <result name="success">staffProfile.jsp</result>
+        </action>
+        <action name="editStaffProfile" class="hoangvp.actions.ViewStaffProfileAction">
+            <result name="error">accessdenied.jsp</result>
+            <result name="success">editStaffProfile.jsp</result>
+        </action>
+        <action name="updateStaffProfile" class="hoangvp.actions.UpdateStaffProfileAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/png,image/jpeg</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+            <result name="error">accessdenied.jsp</result>
+            <result name="input">editStaffProfile.jsp</result>
+            <result name="success">staffProfile.jsp</result>
+        </action>
+        <action name="editTour" class="hoangvp.actions.ViewTourDetailsStaffAction">
+            <result name="error">accessdenied.jsp</result>
+            <result name="success">editTour.jsp</result>
+        </action>
+        <action name="updateTour" class="hoangvp.actions.UpdateTourAction">
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/png,image/jpeg</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+            <result name="input">editTour.jsp</result>
+            <result name="success" type="redirectAction">viewAllToursStaff</result>
+        </action>
+    </package>
+</struts>

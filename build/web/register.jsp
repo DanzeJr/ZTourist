@@ -195,9 +195,7 @@
                 $('#signup').hide();
                 $('#signin').show();
             }
-            $('html, body').animate({
-                scrollTop: $('.register-form').offset().top
-            }, 500, 'linear');
+            
             $(document).ready(function () {
                 //sua lai ham xac dinh loi email de email chi valid khi co ca dau cham sau @ va sau dau cham chi co 2 chu
                 $.validator.methods.email = function (value, element) {

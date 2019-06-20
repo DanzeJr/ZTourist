@@ -1,1 +1,0 @@
-hoanvp.interceptors.TestInterceptor
